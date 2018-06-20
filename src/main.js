@@ -3,6 +3,8 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+import axios from 'axios';
+import qs from 'qs';
 import {
   Container,
   Header,
@@ -19,6 +21,10 @@ Vue.use(Main);
 Vue.use(Footer);
 
 Vue.config.productionTip = false;
+
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+Vue.prototype.$http = axios;
+Vue.prototype.$Qs = qs;
 
 /* eslint-disable no-new */
 new Vue({

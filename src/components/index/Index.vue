@@ -1,30 +1,26 @@
 <template>
-  <div>
-    <h2 class="title">index</h2>
-    <router-link to="/dashboard">dashboard</router-link>
-    <router-link to="/lock">lock</router-link>
-    {{msg}}
-    <button @click="change">change</button>
-  </div>
+  <el-container>
+    <el-header>Header</el-header>
+    <el-container>
+      <el-aside width="200px">Aside</el-aside>
+      <el-main>Main</el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      msg: '11'
-    };
-  },
-  methods: {
-    change () {
-      this.msg = '222';
-    }
-  }
-};
+
 </script>
 
 <style scoped>
-.title {
-  text-align: center;
-}
+  .title {
+    text-align: center;
+  }
+  .el-container {
+    width: 100%;
+    height: 100%;
+  }
+  .el-header{
+    background: #163254;
+  }
 </style>
