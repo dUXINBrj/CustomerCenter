@@ -5,20 +5,35 @@ import App from './App';
 import router from './router';
 import axios from 'axios';
 import qs from 'qs';
+import store from './store/store';
 import {
   Container,
+  Row,
+  Col,
   Header,
   Aside,
   Main,
-  Footer
+  Footer,
+  menu,
+  Submenu,
+  MenuItem,
+  MenuItemGroup
 } from 'element-ui';
 import './assets/common/css/common.css';
+import vuescroll from 'vuescroll';
 
+Vue.use(vuescroll);
 Vue.use(Container);
+Vue.use(Row);
+Vue.use(Col);
 Vue.use(Header);
 Vue.use(Aside);
 Vue.use(Main);
 Vue.use(Footer);
+Vue.use(menu);
+Vue.use(Submenu);
+Vue.use(MenuItem);
+Vue.use(MenuItemGroup);
 
 Vue.config.productionTip = false;
 
@@ -29,6 +44,7 @@ Vue.prototype.$Qs = qs;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   components: { App },
   template: '<App/>'
