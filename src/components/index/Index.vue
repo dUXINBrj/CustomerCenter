@@ -1,12 +1,11 @@
 <template>
   <el-container>
     <el-header>
-      <div class="logo">logo</div>
-      <i class="iconfont  icon-caidan" @click='increment'></i>
-      {{count}}
+      <div class="logo" :style="'width:'+asideWidth">logo</div>
+      <i class="iconfont  icon-caidan" @click='hideAside'></i>
     </el-header>
     <el-container>
-      <el-aside width="200px">
+      <el-aside :width="asideWidth">
         <Aside></Aside>
       </el-aside>
       <el-main>
@@ -29,10 +28,12 @@ export default {
     Aside
   },
   methods: mapActions([
-    'increment'
+    'increment',
+    'hideAside'
   ]),
   computed: mapGetters([
-    'count'
+    'count',
+    'asideWidth'
   ])
 };
 </script>
@@ -51,12 +52,13 @@ export default {
   }
   .el-aside {
     background: rgb(84, 92, 100);
+    transition: width ease 0.3s;
   }
   .logo {
-    width: 200px;
     display: inline-block;
     height: 60px;
     line-height: 60px;
     background: #285892;
+    transition: width ease 0.3s;
   }
 </style>

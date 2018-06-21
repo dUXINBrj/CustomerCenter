@@ -5,7 +5,7 @@ import App from './App';
 import router from './router';
 import axios from 'axios';
 import qs from 'qs';
-import store from './store/store';
+import store from './store/';
 import {
   Container,
   Row,

@@ -9,7 +9,7 @@
             background-color="#545c64"
             text-color="#fff"
             active-text-color="#ffd04b"
-            :collapse="false">
+            :collapse="hideAside">
             <el-submenu index="1">
               <template slot="title">
                 <i class="el-icon-location"></i>
@@ -52,6 +52,7 @@
   </div>
 </template>
 <script>
+import {mapGetters} from 'vuex';
 export default {
   data () {
     return {
@@ -75,7 +76,10 @@ export default {
         }
       }
     };
-  }
+  },
+  computed: mapGetters([
+    'hideAside'
+  ])
 };
 </script>
 <style scoped>
