@@ -17,7 +17,9 @@ import {
   menu,
   Submenu,
   MenuItem,
-  MenuItemGroup
+  MenuItemGroup,
+  Tabs,
+  TabPane
 } from 'element-ui';
 import './assets/common/css/common.css';
 import vuescroll from 'vuescroll';
@@ -34,6 +36,8 @@ Vue.use(menu);
 Vue.use(Submenu);
 Vue.use(MenuItem);
 Vue.use(MenuItemGroup);
+Vue.use(Tabs);
+Vue.use(TabPane);
 
 Vue.config.productionTip = false;
 

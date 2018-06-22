@@ -7,5 +7,11 @@ export default {
   },
   asideWidth: (state) => {
     return state.asideWidth;
+  },
+  navTabs: (state) => {
+    return state.navTabs;
+  },
+  activeTab: (state) => {
+    return state.activeTab;
   }
 };

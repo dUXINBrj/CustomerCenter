@@ -5,5 +5,9 @@ export default {
   },
   hideAside: ({commit, state}) => {
     commit(types.HIDEASIDE);
+  },
+  addTabs: ({commit, state}) => {
+    console.log(arguments);
+    commit(types.ADDTABS);
   }
 };
