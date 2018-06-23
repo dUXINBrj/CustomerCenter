@@ -3,10 +3,11 @@ import Router from 'vue-router';
 import Index from '@/components/index/Index';
 import Lock from '@/components/lock/Lock';
 
-import indexDashboard from '@/components/index/Dashboard/Dashboard';
-import Financing from '@/components/index/CustomerManage/Financing/Financing';
-import ECommerce from '@/components/index/CustomerManage/E-commerce/E-commerce';
-import RB from '@/components/index/CustomerManage/RB/RB';
+import IndexDashboard from '@/components/index/Dashboard/';
+import Financing from '@/components/index/CustomerManage/Financing/';
+import FinancingUserDetail from '@/components/index/CustomerManage/Financing/FinancingUserDetail';
+import ECommerce from '@/components/index/CustomerManage/E-commerce/';
+import RB from '@/components/index/CustomerManage/RB/';
 
 Vue.use(Router);
 
@@ -18,10 +19,11 @@ export default new Router({
       redirect: '/index/dashboard',
       component: Index,
       children: [
-        {path: '/index/dashboard', name: '首页', component: indexDashboard},
+        {path: '/index/dashboard', name: '首页', component: IndexDashboard},
         {path: '/index/CustomerManage/financing', name: '融资平台', component: Financing},
         {path: '/index/CustomerManage/eCommerce', name: '电商平台', component: ECommerce},
-        {path: '/index/CustomerManage/RB', name: '荣邦', component: RB}
+        {path: '/index/CustomerManage/RB', name: '荣邦', component: RB},
+        {path: '/index/CustomerManage/financing/userDetail/:userID/:userName', name: 'FinancingUserDetail', component: FinancingUserDetail}
       ]
     },
     {

@@ -10,10 +10,22 @@ body, html{
   height: 100%;
   font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }
-.el-tabs__item{
-  background: #fff !important;
-}
 .el-icon-arrow-right,.el-icon-arrow-left {
   color: #fff;
   font-size: 20px;
+}
+.nav-container .is-active {
+  background: #efefef !important;
+}
+.nav-container .el-tabs__item {
+  background: #d8d8d8;
+}
+.nav-container .el-tabs--card>.el-tabs__header {
+  border-bottom: 1px solid #d0d0d0;
+}
+.nav-container .el-tabs--card>.el-tabs__header .el-tabs__nav {
+  border: 1px solid #d0d0d0;
+}
+.el-pagination {
+  text-align: center;
 }

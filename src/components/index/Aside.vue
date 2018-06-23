@@ -11,10 +11,10 @@
             active-text-color="#ffd04b"
             :router= true
             :collapse="hideAside">
-            <el-menu-item index="/index/dashboard">
-              <i class="el-icon-location"></i>
-              <span slot="title">首页</span>
-            </el-menu-item>
+            <!--<el-menu-item index="/index/dashboard">-->
+              <!--<i class="el-icon-location"></i>-->
+              <!--<span slot="title">首页</span>-->
+            <!--</el-menu-item>-->
             <el-submenu index="/index/CustomerManage">
               <template slot="title">
                 <i class="el-icon-date"></i>

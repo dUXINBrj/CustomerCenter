@@ -11,9 +11,11 @@
       <el-main>
         <Nav></Nav>
         <div class="main-container">
-          <keep-alive>
-            <router-view />
-          </keep-alive>
+            <transition mode="out-in" enter-active-class="animated zoomIn">
+              <keep-alive>
+                <router-view />
+              </keep-alive>
+            </transition>
         </div>
       </el-main>
     </el-container>
@@ -65,9 +67,13 @@ export default {
       }
       if (flag) {
         let routeInfo = {
-          name: to.name,
           route: to.path
         };
+        if (to.name === 'FinancingUserDetail') {
+          routeInfo.name = to.params.userName;
+        } else {
+          routeInfo.name = to.name;
+        }
         if (to.path === '/index/dashboard') {
           routeInfo.closeable = false;
         } else {
@@ -81,8 +87,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-  $background:#fff;
+<style scoped>
   .title {
     text-align: center;
   }
@@ -115,11 +120,11 @@ export default {
   .main-container {
     padding: 5px;
     position: absolute;
-    top: 61px;
+    top: 48px;
     bottom: 0;
     left: 5px;
     right: 5px;
     overflow-y: auto;
-    background: $background;
+    background: #efefef;
   }
 </style>
