@@ -29,7 +29,8 @@ import {
   DatePicker,
   Table,
   TableColumn,
-  Pagination
+  Pagination,
+  Loading
 } from 'element-ui';
 import './assets/common/css/common.css';
 import './assets/common/css/animate.css';
@@ -61,6 +62,7 @@ Vue.use(DatePicker);
 Vue.use(Table);
 Vue.use(TableColumn);
 Vue.use(Pagination);
+Vue.use(Loading);
 
 Vue.config.productionTip = false;
 

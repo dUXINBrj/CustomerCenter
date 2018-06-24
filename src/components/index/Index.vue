@@ -12,7 +12,7 @@
         <Nav></Nav>
         <div class="main-container">
             <transition mode="out-in" enter-active-class="animated zoomIn">
-              <keep-alive>
+              <keep-alive max="10">
                 <router-view />
               </keep-alive>
             </transition>
@@ -120,7 +120,7 @@ export default {
   .main-container {
     padding: 5px;
     position: absolute;
-    top: 48px;
+    top: 46px;
     bottom: 0;
     left: 5px;
     right: 5px;

@@ -74,5 +74,7 @@ export default {
 };
 </script>
 <style scoped>
-
+  .nav-container {
+    background: #f5f7fa;
+  }
 </style>

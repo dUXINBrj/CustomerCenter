@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading="loading">
     <el-table
       :data="tableData"
       border
@@ -34,7 +34,7 @@
 </template>
 <script>
 export default {
-  props: ['tableData'],
+  props: ['tableData', 'loading'],
   methods: {
     Detail (data) {
       this.$router.push({

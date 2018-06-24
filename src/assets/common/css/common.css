@@ -16,6 +16,7 @@ body, html{
 }
 .nav-container .is-active {
   background: #efefef !important;
+  border-bottom: #d8d8d8 !important;
 }
 .nav-container .el-tabs__item {
   background: #d8d8d8;
@@ -25,6 +26,7 @@ body, html{
 }
 .nav-container .el-tabs--card>.el-tabs__header .el-tabs__nav {
   border: 1px solid #d0d0d0;
+  border-bottom: none;
 }
 .el-pagination {
   text-align: center;

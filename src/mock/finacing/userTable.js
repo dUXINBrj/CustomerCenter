@@ -11,7 +11,8 @@ Mock.mock(ApiPath.getFinacingUserTable, 'post', {
       'date': '@datetime',
       'username': 'zhangsan',
       'type': '@integer(0,1)'
-    }]
+    }],
+    'count': '@integer(50,100)'
   },
   'msg': 'success'
 });

@@ -1,41 +1,43 @@
 <template>
   <div class="searchContent">
-    <el-form :inline="true">
+    <el-form :inline="true" :model="searchData" :rules="rules" ref="searchData">
       <el-row :gutter="20">
         <el-col :span="24">
-          <el-form-item label="登录名:">
+          <el-form-item label="登录名:" prop="userName">
             <el-input size="mini" clearable v-model="searchData.userName" placeholder="请输入登录名"></el-input>
           </el-form-item>
-          <el-form-item label="注册时间:">
+          <el-form-item label="注册时间:" prop="pass">
             <el-date-picker
               size="mini"
               v-model="searchData.startTime"
               type="date"
-              placeholder="选择日期">
+              placeholder="选择开始日期"
+              value-format="timestamp"
+              :picker-options="dateOptions">
             </el-date-picker>
           </el-form-item>
-          <el-form-item label="至">
+          <el-form-item label="至" prop="endTime">
             <el-date-picker
               size="mini"
               v-model="searchData.endTime"
               type="date"
-              placeholder="选择日期">
+              placeholder="选择结束日期"
+              value-format="timestamp"
+              :picker-options="dateOptions">
             </el-date-picker>
           </el-form-item>
-          <el-form-item>
-            <el-button type="primary" size="mini" @click="search" :loading="loading">查询</el-button>
-            <el-button type="warning" size="mini" @click="resetSearch" :loading="loading">重置</el-button>
-          </el-form-item>
-        </el-col>
-        <el-col>
-          <el-form-item label="公司名称:">
-            <el-select size="mini" clearable filterable  v-model="searchData.companyName" placeholder="请选择公司名称">
+          <el-form-item label="公司名称:" prop="company">
+            <el-select size="mini" clearable filterable  v-model="searchData.companyId" placeholder="请选择公司名称">
               <el-option v-for="item in companyOption"
                          :key="item.id"
                          :label="item.name"
                          :value="item.id">
               </el-option>
             </el-select>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" size="mini" @click="search" :loading="loading">查询</el-button>
+            <el-button type="warning" size="mini" @click="resetSearch" :loading="loading">重置</el-button>
           </el-form-item>
         </el-col>
       </el-row>
@@ -46,8 +48,47 @@
 export default {
   props: ['searchData', 'mode', 'loading'],
   data () {
+    let endDateCheck = (rule, value, callback) => {
+      if (value === '') {
+        callback();
+      } else if (this.searchData.startTime !== '' && typeof this.searchData.startTime !== 'object') {
+        if (value > this.searchData.startTime) {
+          callback(new Error('结束时间不能大于开始时间!'));
+        } else {
+          callback();
+        }
+      } else {
+        callback();
+      }
+    };
+    let pass = (rule, value, callback) => {
+      callback();
+    };
     return {
-      companyOption: []
+      companyOption: [],
+      dateOptions: {
+        disabledDate (time) {
+          if (time.getTime() > Date.now()) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      },
+      rules: {
+        endTime: [
+          {validator: endDateCheck, trigger: 'blur'}
+        ],
+        userName: [
+          { max: 50, message: '不能超过50个字符', trigger: 'blur' }
+        ],
+        pass: [
+          {validator: pass, trigger: 'blur'}
+        ],
+        company: [
+          {validator: pass, trigger: 'change'}
+        ]
+      }
     };
   },
   activated () {
@@ -65,9 +106,17 @@ export default {
       });
     },
     search () {
-      this.$emit('search');
+      this.$refs['searchData'].validate((valid) => {
+        if (valid) {
+          this.$emit('search');
+        } else {
+          return false;
+        }
+      });
     },
-    resetSearch () {}
+    resetSearch () {
+      this.$emit('resetSearch');
+    }
   }
 };
 </script>
