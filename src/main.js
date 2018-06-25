@@ -37,6 +37,7 @@ import './assets/common/css/common.css';
 import './assets/common/css/animate.css';
 import vuescroll from 'vuescroll';
 import * as ApiPath from '@/api';
+import * as filters from '@/assets/common/js/filter';
 import Request from '@/http';
 process.env.MOCK && require('@/mock');
 
@@ -74,6 +75,10 @@ Vue.prototype.$request = Request;
 Vue.prototype.$Qs = qs;
 Vue.prototype.$api = ApiPath;
 Vue.prototype.$message = Message;
+
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key]);
+});
 
 /* eslint-disable no-new */
 /* eslint-disable no-unused-vars */

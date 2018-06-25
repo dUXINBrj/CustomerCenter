@@ -31,3 +31,7 @@ body, html{
 .el-pagination {
   text-align: center;
 }
+.table th {
+  background: #c6d2e9;
+  color: #666;
+}

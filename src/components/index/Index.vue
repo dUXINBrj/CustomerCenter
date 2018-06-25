@@ -32,8 +32,18 @@ export default {
   mounted () {
     // 刷新时以当前路由做为tab加入tabs
     if (this.$route.path !== '/index/dashboard') {
+      let routeInfo = {
+        exist: false,
+        closeable: true,
+        route: this.$route.path
+      };
+      if (this.$route.name === 'FinancingUserDetail') {
+        routeInfo.name = this.$route.params.userName;
+      } else {
+        routeInfo.name = this.$route.name;
+      }
       this.$store.commit('addTabs', {route: '/index/dashboard', name: '首页', closeable: false});
-      this.$store.commit('addTabs', {route: this.$route.path, exist: false, name: this.$route.name, closeable: true});
+      this.$store.commit('addTabs', routeInfo);
       this.$store.commit('setActiveTabs', this.$route.path);
     } else {
       this.$store.commit('addTabs', {route: '/index/dashboard', name: '首页', closeable: false});

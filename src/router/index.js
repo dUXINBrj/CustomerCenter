@@ -5,7 +5,7 @@ import Lock from '@/components/lock/Lock';
 
 import IndexDashboard from '@/components/index/Dashboard/';
 import Financing from '@/components/index/CustomerManage/Financing/';
-import FinancingUserDetail from '@/components/index/CustomerManage/Financing/FinancingUserDetail';
+import FinancingCompanyDetail from '@/components/index/CustomerManage/Financing/FinancingCompanyDetail';
 import ECommerce from '@/components/index/CustomerManage/E-commerce/';
 import RB from '@/components/index/CustomerManage/RB/';
 
@@ -23,7 +23,7 @@ export default new Router({
         {path: '/index/CustomerManage/financing', name: '融资平台', component: Financing},
         {path: '/index/CustomerManage/eCommerce', name: '电商平台', component: ECommerce},
         {path: '/index/CustomerManage/RB', name: '荣邦', component: RB},
-        {path: '/index/CustomerManage/financing/userDetail/:userID/:userName', name: 'FinancingUserDetail', component: FinancingUserDetail}
+        {path: '/index/CustomerManage/financing/userDetail/:userID/:userName', name: 'FinancingUserDetail', component: FinancingCompanyDetail}
       ]
     },
     {
