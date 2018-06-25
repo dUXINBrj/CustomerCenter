@@ -30,12 +30,14 @@ import {
   Table,
   TableColumn,
   Pagination,
-  Loading
+  Loading,
+  Message
 } from 'element-ui';
 import './assets/common/css/common.css';
 import './assets/common/css/animate.css';
 import vuescroll from 'vuescroll';
 import * as ApiPath from '@/api';
+import Request from '@/http';
 process.env.MOCK && require('@/mock');
 
 Vue.use(vuescroll);
@@ -68,10 +70,13 @@ Vue.config.productionTip = false;
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 Vue.prototype.$http = axios;
+Vue.prototype.$request = Request;
 Vue.prototype.$Qs = qs;
 Vue.prototype.$api = ApiPath;
+Vue.prototype.$message = Message;
 
 /* eslint-disable no-new */
+/* eslint-disable no-unused-vars */
 new Vue({
   el: '#app',
   store,

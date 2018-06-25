@@ -5,10 +5,6 @@
       border
       style="width: 100%">
       <el-table-column
-        prop="loginAccount"
-        label="登录名">
-      </el-table-column>
-      <el-table-column
         prop="companyName"
         label="企业名称">
         <template slot-scope="scope">
@@ -16,20 +12,25 @@
         </template>
       </el-table-column>
       <el-table-column
-        prop="regTime"
+        prop="regDate"
         label="注册时间"
         width="200">
       </el-table-column>
       <el-table-column
-        prop="authTime"
+        prop="authDate"
         label="企业认证时间"
         width="200">
       </el-table-column>
       <el-table-column
-        prop="firstRegPlatform"
-        label="原始注册平台"
-        :formatter="regType"
-        width="120">
+        prop="custType"
+        label="客户类型"
+        :formatter="customerType"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="threeCertTogether"
+        label="是否三证合一"
+        width="180">
       </el-table-column>
     </el-table>
   </div>
@@ -47,14 +48,14 @@ export default {
         }
       });
     },
-    regType (data) {
-      let type = data.firstRegPlatform;
+    customerType (data) {
+      let type = data.custType;
       /* eslint-disable no-unreachable */
       type = type * 1;
       switch (type) {
-        case 1: return '融资平台'; break;
-        case 2: return '电商平台'; break;
-        case 3: return '荣邦'; break;
+        case 0: return '运营商'; break;
+        case 1: return '企业会员'; break;
+        case 2: return '个人会员'; break;
         default: return '---'; break;
       }
     }

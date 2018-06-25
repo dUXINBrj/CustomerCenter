@@ -10,12 +10,13 @@
       </el-aside>
       <el-main>
         <Nav></Nav>
+        <div class="blank"></div>
         <div class="main-container">
-            <transition mode="out-in" enter-active-class="animated zoomIn">
-              <keep-alive max="10">
-                <router-view />
-              </keep-alive>
-            </transition>
+          <transition mode="out-in" enter-active-class="animated zoomIn">
+            <keep-alive>
+              <router-view />
+            </keep-alive>
+          </transition>
         </div>
       </el-main>
     </el-container>
@@ -32,7 +33,7 @@ export default {
     // 刷新时以当前路由做为tab加入tabs
     if (this.$route.path !== '/index/dashboard') {
       this.$store.commit('addTabs', {route: '/index/dashboard', name: '首页', closeable: false});
-      this.$store.commit('addTabs', {route: this.$route.path, name: this.$route.name, closeable: true});
+      this.$store.commit('addTabs', {route: this.$route.path, exist: false, name: this.$route.name, closeable: true});
       this.$store.commit('setActiveTabs', this.$route.path);
     } else {
       this.$store.commit('addTabs', {route: '/index/dashboard', name: '首页', closeable: false});
@@ -60,6 +61,7 @@ export default {
       let flag = true;
       for (let item of this.navTabs) {
         if (item.route === to.path) {
+          this.$store.commit('changeTabStatu', to.path);
           this.$store.commit('setActiveTabs', to.path);
           flag = false;
           break;
@@ -67,7 +69,8 @@ export default {
       }
       if (flag) {
         let routeInfo = {
-          route: to.path
+          route: to.path,
+          exist: false
         };
         if (to.name === 'FinancingUserDetail') {
           routeInfo.name = to.params.userName;
@@ -126,5 +129,15 @@ export default {
     right: 5px;
     overflow-y: auto;
     background: #efefef;
+    z-index: 98;
+  }
+  .blank {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    background: #efefef;
+    left: 0;
+    top: 46px;
+    z-index: 99;
   }
 </style>

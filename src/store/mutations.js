@@ -26,6 +26,14 @@ const mutations = {
   'setActiveTabs' (state, data) {
     state.activeTab = data;
   },
+  changeTabStatu (state, path) {
+    for (let item of state.navTabs) {
+      if (item.route === path) {
+        item.exit = true;
+        break;
+      }
+    }
+  },
   deleteTabs (state, route) {
     let index = 0;
     for (let option of state.navTabs) {

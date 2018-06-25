@@ -1,11 +1,48 @@
 <template>
   <div class="searchContent">
-    <el-form :inline="true" :model="searchData" :rules="rules" ref="searchData">
+    <el-form :inline="true" :model="searchData" :rules="rules" ref="searchData" :label-width="labelWidth">
       <el-row :gutter="20">
-        <el-col :span="24">
+        <el-col :span="8">
           <el-form-item label="登录名" prop="loginAccount">
             <el-input size="mini" clearable maxlength="50" v-model="searchData.loginAccount" placeholder="请输入登录名"></el-input>
           </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="企业名称" prop="company">
+            <el-select size="mini" clearable filterable  v-model="searchData.companyName" placeholder="请选择企业名称">
+              <el-option v-for="item in companyOption"
+                         :key="item.custId"
+                         :label="item.companyName"
+                         :value="item.companyName">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="企业信息状态" prop="company">
+            <el-select size="mini" clearable filterable  v-model="searchData.custState" placeholder="请选择企业信息状态">
+              <el-option v-for="(item, key) in companyCusStatu"
+                         :key="item"
+                         :label="key"
+                         :value="item">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row :gutter="20">
+        <el-col :span="8">
+          <el-form-item label="信息认证状态" prop="company">
+            <el-select size="mini" clearable filterable  v-model="searchData.infoAuth" placeholder="请选择信息认证状态">
+              <el-option v-for="(item, key) in companyAuthstatus"
+                         :key="item"
+                         :label="key"
+                         :value="item">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
           <el-form-item label="注册时间" prop="pass">
             <el-date-picker
               size="mini"
@@ -16,6 +53,8 @@
               :picker-options="dateOptions">
             </el-date-picker>
           </el-form-item>
+        </el-col>
+        <el-col :span="8">
           <el-form-item label="至" prop="endTime">
             <el-date-picker
               size="mini"
@@ -26,15 +65,21 @@
               :picker-options="dateOptions">
             </el-date-picker>
           </el-form-item>
-          <el-form-item label="公司名称" prop="company">
-            <el-select size="mini" clearable filterable  v-model="searchData.companyName" placeholder="请选择公司名称">
-              <el-option v-for="item in companyOption"
-                         :key="item.custId"
-                         :label="item.companyName"
-                         :value="item.companyName">
+        </el-col>
+      </el-row>
+      <el-row :gutter="20">
+        <el-col :span="8">
+          <el-form-item label="所属地市" prop="company">
+            <el-select size="mini" clearable filterable  v-model="searchData.areaInfo" placeholder="请选择所属地市">
+              <el-option v-for="(item,key) in areaCityOption"
+                         :key="key"
+                         :label="item"
+                         :value="item">
               </el-option>
             </el-select>
           </el-form-item>
+        </el-col>
+        <el-col :span="8">
           <el-form-item>
             <el-button type="primary" size="mini" @click="search" :loading="loading">查询</el-button>
             <el-button type="warning" size="mini" @click="resetSearch" :loading="loading">重置</el-button>
@@ -65,7 +110,11 @@ export default {
       callback();
     };
     return {
+      labelWidth: '100px',
       companyOption: [],
+      companyCusStatu: [],
+      companyAuthstatus: [],
+      areaCityOption: [],
       dateOptions: {
         disabledDate (time) {
           if (time.getTime() > Date.now()) {
@@ -92,16 +141,52 @@ export default {
     };
   },
   activated () {
-    this.getFinacingCompany();
+    this.getCompany();
+    this.getCompanyCusStatu();
+    this.getCompanyAuthstatus();
+    this.getAreaCity();
   },
   methods: {
-    getFinacingCompany () {
+    getCompany () {
       this.$request(
         this.$api.getFinacingCompany,
         'POST',
-        {clientType: 1}
+        {clientType: 2}
       ).then(res => {
         this.companyOption = res.responseDate.companys;
+      }).catch(errMsg => {
+        this.$message.error(errMsg);
+      });
+    },
+    getCompanyCusStatu () {
+      this.$request(
+        this.$api.getCompanyCusStatu,
+        'POST',
+        {clientType: 2}
+      ).then(res => {
+        this.companyCusStatu = res.responseDate.custStatus;
+      }).catch(errMsg => {
+        this.$message.error(errMsg);
+      });
+    },
+    getCompanyAuthstatus () {
+      this.$request(
+        this.$api.getCompanyAuthstatus,
+        'POST',
+        {clientType: 2}
+      ).then(res => {
+        this.companyAuthstatus = res.responseDate.infoAuthStatus;
+      }).catch(errMsg => {
+        this.$message.error(errMsg);
+      });
+    },
+    getAreaCity () {
+      this.$request(
+        this.$api.getAreaCity,
+        'POST',
+        {}
+      ).then(res => {
+        this.areaCityOption = res.responseDate.areaInfos;
       }).catch(errMsg => {
         this.$message.error(errMsg);
       });

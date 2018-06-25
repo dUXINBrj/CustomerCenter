@@ -1,4 +1,5 @@
 require('@/mock/finacing/userTable');
+require('@/mock/eCommerce/eCommerce');
 
 const Mock = require('mockjs');
 

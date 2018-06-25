@@ -3,27 +3,44 @@ import * as ApiPath from '@/api';
 const Mock = require('mockjs');
 
 Mock.mock(ApiPath.getFinacingUserTable, 'post', {
-  'code': 0,
-  'data': {
-    'list|1-20': [{
-      'id|+1': 1,
-      'fullName': '@CNAME',
-      'date': '@datetime',
-      'username': 'zhangsan',
-      'type': '@integer(0,1)'
+  'retCode': 0,
+  'responseDate': {
+    'accountVoList|1-20': [{
+      'custId|+1': 1,
+      'loginAccount': '@CNAME',
+      'companyName': '@CNAME',
+      'regTime': '@datetime',
+      'authTime': '@datetime',
+      'firstRegPlatform': '@integer(1,3)'
     }],
-    'count': '@integer(50,100)'
+    'totalCount': '@integer(50,100)'
   },
-  'msg': 'success'
+  'retMessage': 'success'
+});
+
+Mock.mock(ApiPath.getFinacingCompanyTable, 'post', {
+  'retCode': 0,
+  'responseDate': {
+    'companyVoList|1-20': [{
+      'custId|+1': 1,
+      'companyName': '@CNAME',
+      'regDate': '@datetime',
+      'authDate': '@datetime',
+      'custType': '@integer(0,2)',
+      'threeCertTogether': '@integer(0,1)'
+    }],
+    'totalCount': '@integer(50,100)'
+  },
+  'retMessage': 'success'
 });
 
 Mock.mock(ApiPath.getFinacingCompany, 'post', {
-  'code': 0,
-  'data': {
-    'list|1-20': [{
-      'id|+1': 1,
-      'name': '@CNAME'
+  'retCode': 0,
+  'responseDate': {
+    'companys|1-20': [{
+      'custId|+1': 1,
+      'companyName': '@CNAME'
     }]
   },
-  'msg': 'success'
+  'retMessage': '操作成功'
 });

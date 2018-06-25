@@ -1,2 +1,9 @@
-export const getFinacingUserTable = 'getFinacingUserTable';
-export const getFinacingCompany = 'getFinacingCompany';
+export const getFinacingUserTable = '/userinfo/jfptuserinfo';
+export const getFinacingCompanyTable = '/company/jfptcompany';
+export const getFinacingCompany = '/company/getcompanyname';
+
+export const getECommerceUserTable = '/userinfo/dsptuserinfo';
+export const getCompanyCusStatu = '/company/custStatus';
+export const getCompanyAuthstatus = '/company/infoauthstatus';
+export const getAreaCity = '/company/dsptareainfoquery';
+export const getECommerceCompanyTable = '/company/dsptcompany';
