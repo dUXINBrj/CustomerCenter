@@ -6,10 +6,12 @@
       style="width: 100%">
       <el-table-column
         prop="loginAccount"
+        :show-overflow-tooltip="true"
         label="登录名">
       </el-table-column>
       <el-table-column
         prop="companyName"
+        :show-overflow-tooltip="true"
         label="企业名称">
         <template slot-scope="scope">
           <el-button @click.stop="Detail(scope.row)" type="text" size="small">{{scope.row.companyName}}</el-button>
@@ -18,39 +20,46 @@
       <el-table-column
         prop="regDate"
         label="注册时间"
+        :show-overflow-tooltip="true"
         width="200">
       </el-table-column>
       <el-table-column
         prop="operTime"
         label="资料修改时间"
+        :show-overflow-tooltip="true"
         width="200">
       </el-table-column>
       <el-table-column
         prop="userState"
         label="用户状态"
+        :show-overflow-tooltip="true"
         :formatter="userState"
         width="100">
       </el-table-column>
       <el-table-column
         prop="userType"
         label="用户类型"
+        :show-overflow-tooltip="true"
         :formatter="userType"
         width="100">
       </el-table-column>
       <el-table-column
         prop="userAccountType"
+        :show-overflow-tooltip="true"
         label="账号类型"
         :formatter="accountType"
         width="100">
       </el-table-column>
       <el-table-column
         prop="lockedFlag"
+        :show-overflow-tooltip="true"
         label="账号状态"
         :formatter="accountStatu"
         width="100">
       </el-table-column>
       <el-table-column
         prop="firstRegPlatform"
+        :show-overflow-tooltip="true"
         label="原始注册平台"
         :formatter="regType"
         width="120">
@@ -64,10 +73,10 @@ export default {
   methods: {
     Detail (data) {
       this.$router.push({
-        name: 'FinancingUserDetail',
+        name: 'ECommerceCompanyDetail',
         params: {
-          userID: data.custId,
-          userName: data.companyName
+          custId: data.custId,
+          companyName: data.companyName
         }
       });
     },

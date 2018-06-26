@@ -18,23 +18,19 @@
         </template>
       </el-table-column>
       <el-table-column
-        prop="regTime"
-        label="注册时间"
-        :show-overflow-tooltip="true"
-        width="200">
+        prop="userCode"
+        label="会员编号"
+        :show-overflow-tooltip="true">
       </el-table-column>
       <el-table-column
-        prop="authTime"
-        label="企业认证时间"
-        :show-overflow-tooltip="true"
-        width="200">
+        prop="cellPhone"
+        label="手机号"
+        :show-overflow-tooltip="true">
       </el-table-column>
       <el-table-column
-        prop="firstRegPlatform"
-        :show-overflow-tooltip="true"
-        label="原始注册平台"
-        :formatter="regType"
-        width="120">
+        prop="email"
+        label="邮箱"
+        :show-overflow-tooltip="true">
       </el-table-column>
     </el-table>
   </div>
@@ -45,23 +41,12 @@ export default {
   methods: {
     Detail (data) {
       this.$router.push({
-        name: 'FinancingCompanyDetail',
+        name: 'RBCompanyDetail',
         params: {
           custId: data.custId,
           companyName: data.companyName
         }
       });
-    },
-    regType (data) {
-      let type = data.firstRegPlatform;
-      /* eslint-disable no-unreachable */
-      type = type * 1;
-      switch (type) {
-        case 1: return '融资平台'; break;
-        case 2: return '电商平台'; break;
-        case 3: return '荣邦'; break;
-        default: return '---'; break;
-      }
     }
   }
 };

@@ -37,8 +37,8 @@ export default {
         closeable: true,
         route: this.$route.path
       };
-      if (this.$route.name === 'FinancingUserDetail') {
-        routeInfo.name = this.$route.params.userName;
+      if (this.$route.meta.getName === true) {
+        routeInfo.name = this.$route.params.companyName;
       } else {
         routeInfo.name = this.$route.name;
       }
@@ -82,8 +82,8 @@ export default {
           route: to.path,
           exist: false
         };
-        if (to.name === 'FinancingUserDetail') {
-          routeInfo.name = to.params.userName;
+        if (to.meta.getName === true) {
+          routeInfo.name = to.params.companyName;
         } else {
           routeInfo.name = to.name;
         }

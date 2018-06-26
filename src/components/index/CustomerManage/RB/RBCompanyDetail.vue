@@ -5,7 +5,7 @@
       <el-row>
         <el-col :span="6">
           <el-form label-position="left" inline class="tableDetailItem">
-            <el-form-item label="企业名称:">
+            <el-form-item label="公司名称:">
               <span>{{baseInfo.companyName | empty}}</span>
             </el-form-item>
           </el-form>
@@ -19,15 +19,75 @@
         </el-col>
         <el-col :span="6">
           <el-form label-position="left" inline class="tableDetailItem">
-            <el-form-item label="业务代表:">
-              <span>{{baseInfo.businessReprentative | empty}}</span>
+            <el-form-item label="商户类型:">
+              <span>{{baseInfo.companyType | empty }}</span>
             </el-form-item>
           </el-form>
         </el-col>
         <el-col :span="6">
           <el-form label-position="left" inline class="tableDetailItem">
-            <el-form-item label="客户类型:">
-              <span>{{baseInfo.custType |custType }}</span>
+            <el-form-item label="行业类型:">
+              <span>{{baseInfo.industrytype | empty }}</span>
+            </el-form-item>
+          </el-form>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="6">
+          <el-form label-position="left" inline class="tableDetailItem">
+            <el-form-item label="法人:">
+              <span>{{baseInfo.legalPerson | empty}}</span>
+            </el-form-item>
+          </el-form>
+        </el-col>
+        <el-col :span="6">
+          <el-form label-position="left" inline class="tableDetailItem">
+            <el-form-item label="法人身份证号:">
+              <span>{{baseInfo.legalpersonIdcard | empty}}</span>
+            </el-form-item>
+          </el-form>
+        </el-col>
+        <el-col :span="6">
+          <el-form label-position="left" inline class="tableDetailItem">
+            <el-form-item label="法人电话:">
+              <span>{{baseInfo.legalpersonPhone | empty}}</span>
+            </el-form-item>
+          </el-form>
+        </el-col>
+        <el-col :span="6">
+          <el-form label-position="left" inline class="tableDetailItem">
+            <el-form-item label="负责人:">
+              <span>{{baseInfo.companyleander | empty}}</span>
+            </el-form-item>
+          </el-form>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="6">
+          <el-form label-position="left" inline class="tableDetailItem">
+            <el-form-item label="负责人电话:">
+              <span>{{baseInfo.companyleanderphone | empty}}</span>
+            </el-form-item>
+          </el-form>
+        </el-col>
+        <el-col :span="6">
+          <el-form label-position="left" inline class="tableDetailItem">
+            <el-form-item label="所属省:">
+              <span>{{baseInfo.provinceName | empty}}</span>
+            </el-form-item>
+          </el-form>
+        </el-col>
+        <el-col :span="6">
+          <el-form label-position="left" inline class="tableDetailItem">
+            <el-form-item label="所属市:">
+              <span>{{baseInfo.cityName | empty}}</span>
+            </el-form-item>
+          </el-form>
+        </el-col>
+        <el-col :span="6">
+          <el-form label-position="left" inline class="tableDetailItem">
+            <el-form-item label="所属区:">
+              <span>{{baseInfo.areaName | empty}}</span>
             </el-form-item>
           </el-form>
         </el-col>
@@ -40,30 +100,7 @@
             </el-form-item>
           </el-form>
         </el-col>
-        <el-col :span="6">
-          <el-form label-position="left" inline class="tableDetailItem">
-            <el-form-item label="税号:">
-              <span>{{baseInfo.taxRegistrationNumber | empty}}</span>
-            </el-form-item>
-          </el-form>
-        </el-col>
-        <el-col :span="6">
-          <el-form label-position="left" inline class="tableDetailItem">
-            <el-form-item label="贷款卡编号:">
-              <span>{{baseInfo.loanCardNumber | empty}}</span>
-            </el-form-item>
-          </el-form>
-        </el-col>
-        <el-col :span="6">
-          <el-form label-position="left" inline class="tableDetailItem">
-            <el-form-item label="是否三证合一:">
-              <span>{{baseInfo.threeCertTogether}}</span>
-            </el-form-item>
-          </el-form>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="6">
+        <el-col :span="18">
           <el-form label-position="left" inline class="tableDetailItem">
             <el-form-item label="邮箱:">
               <span>{{baseInfo.email | empty}}</span>
@@ -100,7 +137,7 @@
                 </el-col>
               </el-row>
               <el-row>
-                <el-col :span="7">公司营业章程</el-col>
+                <el-col :span="7">税务登记证</el-col>
                 <el-col :span="10" :title="baseInfo.attachVos[2].attachName">{{baseInfo.attachVos[2].attachName | empty}}</el-col>
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[2].filePath">
@@ -113,7 +150,7 @@
                 </el-col>
               </el-row>
               <el-row>
-                <el-col :span="7">近三个月的财务报表</el-col>
+                <el-col :span="7">业务代表身份证</el-col>
                 <el-col :span="10" :title="baseInfo.attachVos[4].attachName">{{baseInfo.attachVos[4].attachName | empty}}</el-col>
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[4].filePath">
@@ -125,38 +162,12 @@
                   </div>
                 </el-col>
               </el-row>
-              <el-row>
-                <el-col :span="7">业务代表身份证</el-col>
-                <el-col :span="10" :title="baseInfo.attachVos[6].attachName">{{baseInfo.attachVos[6].attachName | empty}}</el-col>
-                <el-col :span="7">
-                  <div v-if="baseInfo.attachVos[6].filePath">
-                    <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[6])">查看</a>
-                    <a href="javascript:void (0)">下载</a>
-                  </div>
-                  <div v-if="!baseInfo.attachVos[6].filePath">
-                    暂无
-                  </div>
-                </el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="7">其他</el-col>
-                <el-col :span="10" :title="baseInfo.attachVos[8].attachName">{{baseInfo.attachVos[8].attachName | empty}}</el-col>
-                <el-col :span="7">
-                  <div v-if="baseInfo.attachVos[8].filePath">
-                    <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[8])">查看</a>
-                    <a href="javascript:void (0)">下载</a>
-                  </div>
-                  <div v-if="!baseInfo.attachVos[8].filePath">
-                    暂无
-                  </div>
-                </el-col>
-              </el-row>
             </div>
           </el-col>
           <el-col :span="12">
             <div class="doc">
               <el-row>
-                <el-col :span="7">开户许可证</el-col>
+                <el-col :span="7">企业Logo</el-col>
                 <el-col :span="10" :title="baseInfo.attachVos[1].attachName">{{baseInfo.attachVos[1].attachName | empty}}</el-col>
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[1].filePath">
@@ -169,7 +180,7 @@
                 </el-col>
               </el-row>
               <el-row>
-                <el-col :span="7">财务报表</el-col>
+                <el-col :span="7">组织机构</el-col>
                 <el-col :span="10" :title="baseInfo.attachVos[3].attachName">{{baseInfo.attachVos[3].attachName | empty}}</el-col>
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[3].filePath">
@@ -181,38 +192,61 @@
                   </div>
                 </el-col>
               </el-row>
-              <el-row>
-                <el-col :span="7">法人代表身份证</el-col>
-                <el-col :span="10" :title="baseInfo.attachVos[5].attachName">{{baseInfo.attachVos[5].attachName | empty}}</el-col>
-                <el-col :span="7">
-                  <div v-if="baseInfo.attachVos[5].filePath">
-                    <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[5])">查看</a>
-                    <a href="javascript:void (0)">下载</a>
-                  </div>
-                  <div v-if="!baseInfo.attachVos[5].filePath">
-                    暂无
-                  </div>
-                </el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="7">企业征信报告</el-col>
-                <el-col :span="10" :title="baseInfo.attachVos[7].attachName">{{baseInfo.attachVos[7].attachName | empty}}</el-col>
-                <el-col :span="7">
-                  <div v-if="baseInfo.attachVos[7].filePath">
-                    <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[7])">查看</a>
-                    <a href="javascript:void (0)">下载</a>
-                  </div>
-                  <div v-if="!baseInfo.attachVos[7].filePath">
-                    暂无
-                  </div>
-                </el-col>
-              </el-row>
             </div>
           </el-col>
         </el-row>
       </div>
     </div>
     <div class="content">
+      <h2 class="title">银行账户信息</h2>
+      <div class="container table">
+        <el-table
+          :data="baseInfo.bankAccountVos"
+          height="250"
+          border
+          style="width: 100%">
+          <el-table-column
+            type="index"
+            :index="indexMethod">
+          </el-table-column>
+          <el-table-column
+            prop="accountType"
+            :formatter="accountType"
+            :show-overflow-tooltip="true"
+            label="账户类型">
+          </el-table-column>
+          <el-table-column
+            prop="accountName"
+            :show-overflow-tooltip="true"
+            label="账户名称">
+          </el-table-column>
+          <el-table-column
+            prop="bankAccount"
+            :show-overflow-tooltip="true"
+            label="账号">
+          </el-table-column>
+          <el-table-column
+            prop="bank"
+            :show-overflow-tooltip="true"
+            label="开户行名称">
+          </el-table-column>
+          <el-table-column
+            prop="bankCode"
+            :show-overflow-tooltip="true"
+            label="联行号">
+          </el-table-column>
+          <el-table-column
+            prop="idcardNo"
+            :show-overflow-tooltip="true"
+            label="身份证号码">
+          </el-table-column>
+          <el-table-column
+            prop="mobilePhone"
+            :show-overflow-tooltip="true"
+            label="手机号">
+          </el-table-column>
+        </el-table>
+      </div>
       <h2 class="title">企业下属账号信息</h2>
       <div class="container table">
         <el-table
@@ -226,21 +260,24 @@
           </el-table-column>
           <el-table-column
             prop="loginName"
+            :show-overflow-tooltip="true"
             label="登录名">
           </el-table-column>
           <el-table-column
-            prop="cellPhone"
-            label="手机号码"
+            prop="userCode"
+            label="会员编码"
+            :show-overflow-tooltip="true"
             width="200">
           </el-table-column>
           <el-table-column
-            prop="email"
-            label="电子邮箱">
+            prop="cellPhone"
+            :show-overflow-tooltip="true"
+            label="手机号码">
           </el-table-column>
           <el-table-column
-            prop="firstRegPlatform"
-            :formatter="regType"
-            label="原始注册平台">
+            prop="mUserid"
+            :show-overflow-tooltip="true"
+            label="会员ID">
           </el-table-column>
         </el-table>
       </div>
@@ -256,7 +293,8 @@ export default {
       custId: '',
       baseInfo: {
         attachVos: [],
-        companyAccountVo: []
+        companyAccountVo: [],
+        bankAccountVos: []
       }
     };
   },
@@ -282,12 +320,12 @@ export default {
         'custId': this.custId
       };
       this.$request(
-        this.$api.getFinacingCompanyDetail,
+        this.$api.getRbCompanyDetail,
         'POST',
         params
       ).then(res => {
         this.loading = false;
-        this.baseInfo = res.responseDate.companyInfoDetail;
+        this.baseInfo = res.responseDate.companyDetailVo;
       }).catch(errMsg => {
         this.loading = false;
         this.$message.error(errMsg);
@@ -296,14 +334,13 @@ export default {
     indexMethod (index) {
       return index + 1;
     },
-    regType (data) {
-      let type = data.firstRegPlatform;
+    accountType (data) {
+      let type = data.accountType;
       /* eslint-disable no-unreachable */
       type = type * 1;
       switch (type) {
-        case 1: return '融资平台'; break;
-        case 2: return '电商平台'; break;
-        case 3: return '荣邦'; break;
+        case 0: return '公帐'; break;
+        case 1: return '私账'; break;
         default: return '---'; break;
       }
     },

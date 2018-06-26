@@ -6,6 +6,7 @@
       style="width: 100%">
       <el-table-column
         prop="companyName"
+        :show-overflow-tooltip="true"
         label="企业名称">
         <template slot-scope="scope">
           <el-button @click.stop="Detail(scope.row)" type="text" size="small">{{scope.row.companyName}}</el-button>
@@ -13,35 +14,27 @@
       </el-table-column>
       <el-table-column
         prop="regDate"
-        label="归属地市"
-        width="200">
-      </el-table-column>
-      <el-table-column
-        prop="regDate"
         label="注册时间"
+        :show-overflow-tooltip="true"
         width="200">
       </el-table-column>
       <el-table-column
         prop="authDate"
         label="企业认证时间"
+        :show-overflow-tooltip="true"
         width="200">
       </el-table-column>
       <el-table-column
         prop="custType"
         label="客户类型"
         :formatter="customerType"
+        :show-overflow-tooltip="true"
         width="180">
       </el-table-column>
       <el-table-column
-        prop="custType"
-        label="企业性质"
-        :formatter="customerType"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="custType"
-        label="主营行业"
-        :formatter="customerType"
+        prop="threeCertTogether"
+        :show-overflow-tooltip="true"
+        label="是否三证合一"
         width="180">
       </el-table-column>
     </el-table>
@@ -53,10 +46,10 @@ export default {
   methods: {
     Detail (data) {
       this.$router.push({
-        name: 'FinancingUserDetail',
+        name: 'FinancingCompanyDetail',
         params: {
-          userID: data.custId,
-          userName: data.companyName
+          custId: data.custId,
+          companyName: data.companyName
         }
       });
     },

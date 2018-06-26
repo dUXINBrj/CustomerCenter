@@ -20,7 +20,7 @@
         <el-col :span="6">
           <el-form label-position="left" inline class="tableDetailItem">
             <el-form-item label="业务代表:">
-              <span>{{baseInfo.businessReprentative | empty}}</span>
+              <span>{{baseInfo.businessReprentative  | empty }}</span>
             </el-form-item>
           </el-form>
         </el-col>
@@ -49,15 +49,45 @@
         </el-col>
         <el-col :span="6">
           <el-form label-position="left" inline class="tableDetailItem">
-            <el-form-item label="贷款卡编号:">
-              <span>{{baseInfo.loanCardNumber | empty}}</span>
+            <el-form-item label="工商登记号:">
+              <span>{{baseInfo.businessRegistrationNumber | empty}}</span>
             </el-form-item>
           </el-form>
         </el-col>
         <el-col :span="6">
           <el-form label-position="left" inline class="tableDetailItem">
-            <el-form-item label="是否三证合一:">
-              <span>{{baseInfo.threeCertTogether}}</span>
+            <el-form-item label="所属地市:">
+              <span>{{baseInfo.areainfo | empty}}</span>
+            </el-form-item>
+          </el-form>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="6">
+          <el-form label-position="left" inline class="tableDetailItem">
+            <el-form-item label="客户状态:">
+              <span>{{baseInfo.custState | custState}}</span>
+            </el-form-item>
+          </el-form>
+        </el-col>
+        <el-col :span="6">
+          <el-form label-position="left" inline class="tableDetailItem">
+            <el-form-item label="企业认证状态:">
+              <span>{{baseInfo.infoAuth | infoAuth}}</span>
+            </el-form-item>
+          </el-form>
+        </el-col>
+        <el-col :span="6">
+          <el-form label-position="left" inline class="tableDetailItem">
+            <el-form-item label="企业性质:">
+              <span>{{baseInfo.enterpriseTypeCode | empty}}</span>
+            </el-form-item>
+          </el-form>
+        </el-col>
+        <el-col :span="6">
+          <el-form label-position="left" inline class="tableDetailItem">
+            <el-form-item label="主营行业:">
+              <span>{{baseInfo.custSupply | empty}}</span>
             </el-form-item>
           </el-form>
         </el-col>
@@ -100,7 +130,7 @@
                 </el-col>
               </el-row>
               <el-row>
-                <el-col :span="7">公司营业章程</el-col>
+                <el-col :span="7">税务登记证</el-col>
                 <el-col :span="10" :title="baseInfo.attachVos[2].attachName">{{baseInfo.attachVos[2].attachName | empty}}</el-col>
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[2].filePath">
@@ -113,7 +143,7 @@
                 </el-col>
               </el-row>
               <el-row>
-                <el-col :span="7">近三个月的财务报表</el-col>
+                <el-col :span="7">业务代表身份证正面</el-col>
                 <el-col :span="10" :title="baseInfo.attachVos[4].attachName">{{baseInfo.attachVos[4].attachName | empty}}</el-col>
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[4].filePath">
@@ -125,38 +155,12 @@
                   </div>
                 </el-col>
               </el-row>
-              <el-row>
-                <el-col :span="7">业务代表身份证</el-col>
-                <el-col :span="10" :title="baseInfo.attachVos[6].attachName">{{baseInfo.attachVos[6].attachName | empty}}</el-col>
-                <el-col :span="7">
-                  <div v-if="baseInfo.attachVos[6].filePath">
-                    <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[6])">查看</a>
-                    <a href="javascript:void (0)">下载</a>
-                  </div>
-                  <div v-if="!baseInfo.attachVos[6].filePath">
-                    暂无
-                  </div>
-                </el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="7">其他</el-col>
-                <el-col :span="10" :title="baseInfo.attachVos[8].attachName">{{baseInfo.attachVos[8].attachName | empty}}</el-col>
-                <el-col :span="7">
-                  <div v-if="baseInfo.attachVos[8].filePath">
-                    <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[8])">查看</a>
-                    <a href="javascript:void (0)">下载</a>
-                  </div>
-                  <div v-if="!baseInfo.attachVos[8].filePath">
-                    暂无
-                  </div>
-                </el-col>
-              </el-row>
             </div>
           </el-col>
           <el-col :span="12">
             <div class="doc">
               <el-row>
-                <el-col :span="7">开户许可证</el-col>
+                <el-col :span="7">企业Logo</el-col>
                 <el-col :span="10" :title="baseInfo.attachVos[1].attachName">{{baseInfo.attachVos[1].attachName | empty}}</el-col>
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[1].filePath">
@@ -169,7 +173,7 @@
                 </el-col>
               </el-row>
               <el-row>
-                <el-col :span="7">财务报表</el-col>
+                <el-col :span="7">组织机构</el-col>
                 <el-col :span="10" :title="baseInfo.attachVos[3].attachName">{{baseInfo.attachVos[3].attachName | empty}}</el-col>
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[3].filePath">
@@ -182,7 +186,7 @@
                 </el-col>
               </el-row>
               <el-row>
-                <el-col :span="7">法人代表身份证</el-col>
+                <el-col :span="7">业务代表身份证背面</el-col>
                 <el-col :span="10" :title="baseInfo.attachVos[5].attachName">{{baseInfo.attachVos[5].attachName | empty}}</el-col>
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[5].filePath">
@@ -190,19 +194,6 @@
                     <a href="javascript:void (0)">下载</a>
                   </div>
                   <div v-if="!baseInfo.attachVos[5].filePath">
-                    暂无
-                  </div>
-                </el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="7">企业征信报告</el-col>
-                <el-col :span="10" :title="baseInfo.attachVos[7].attachName">{{baseInfo.attachVos[7].attachName | empty}}</el-col>
-                <el-col :span="7">
-                  <div v-if="baseInfo.attachVos[7].filePath">
-                    <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[7])">查看</a>
-                    <a href="javascript:void (0)">下载</a>
-                  </div>
-                  <div v-if="!baseInfo.attachVos[7].filePath">
                     暂无
                   </div>
                 </el-col>
@@ -282,12 +273,12 @@ export default {
         'custId': this.custId
       };
       this.$request(
-        this.$api.getFinacingCompanyDetail,
+        this.$api.getECommerceCompanyDetail,
         'POST',
         params
       ).then(res => {
         this.loading = false;
-        this.baseInfo = res.responseDate.companyInfoDetail;
+        this.baseInfo = res.responseDate.companyDetailVo;
       }).catch(errMsg => {
         this.loading = false;
         this.$message.error(errMsg);

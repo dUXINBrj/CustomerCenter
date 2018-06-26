@@ -13,41 +13,24 @@
         </template>
       </el-table-column>
       <el-table-column
-        prop="areaInfo"
-        label="归属地市"
-        :show-overflow-tooltip="true"
-        width="200">
+        prop="industrytypeName"
+        label="行业类型"
+        :show-overflow-tooltip="true">
       </el-table-column>
       <el-table-column
-        prop="regDate"
+        prop="address"
         :show-overflow-tooltip="true"
-        label="注册时间"
-        width="200">
+        label="公司地址">
       </el-table-column>
       <el-table-column
-        prop="authDate"
-        label="企业认证时间"
-        :show-overflow-tooltip="true"
-        width="200">
+        prop="companyLeander"
+        label="负责人"
+        :show-overflow-tooltip="true">
       </el-table-column>
       <el-table-column
-        prop="custType"
-        label="客户类型"
-        :show-overflow-tooltip="true"
-        :formatter="customerType"
-        width="100">
-      </el-table-column>
-      <el-table-column
-        prop="enterpriseTypeCode"
-        label="企业性质"
-        :show-overflow-tooltip="true"
-        width="100">
-      </el-table-column>
-      <el-table-column
-        prop="custSupply"
-        label="主营行业"
-        :show-overflow-tooltip="true"
-        width="100">
+        prop="email"
+        label="邮箱"
+        :show-overflow-tooltip="true">
       </el-table-column>
     </el-table>
   </div>
@@ -58,7 +41,7 @@ export default {
   methods: {
     Detail (data) {
       this.$router.push({
-        name: 'ECommerceCompanyDetail',
+        name: 'RBCompanyDetail',
         params: {
           custId: data.custId,
           companyName: data.companyName
