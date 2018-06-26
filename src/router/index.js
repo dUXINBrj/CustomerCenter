@@ -10,6 +10,7 @@ import ECommerce from '@/components/index/CustomerManage/E-commerce/';
 import ECommerceCompanyDetail from '@/components/index/CustomerManage/E-commerce/ECommercdCompanyDetail';
 import RB from '@/components/index/CustomerManage/RB/';
 import RbCompanyDetail from '@/components/index/CustomerManage/RB/RBCompanyDetail';
+import ViewImg from '@/components/index/CustomerManage/ViewImg';
 
 Vue.use(Router);
 
@@ -56,6 +57,11 @@ export default new Router({
           name: 'RBCompanyDetail',
           component: RbCompanyDetail,
           meta: {getName: true}
+        },
+        {path: '/index/CustomerManage/ViewImg',
+          name: '图片浏览',
+          component: ViewImg,
+          meta: {getName: false}
         }
       ]
     },

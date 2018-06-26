@@ -262,19 +262,6 @@ export default {
   },
   mounted () {
     this.custId = this.$route.params.custId;
-    this.getCompanyInfo();
-  },
-  activated () {
-    this.custId = this.$route.params.custId;
-    let path = this.$route.path;
-    for (let item of this.navTabs) {
-      if (item.route === path) {
-        if (!item.exit) {
-          this.getCompanyInfo();
-        }
-        break;
-      }
-    }
   },
   methods: {
     getCompanyInfo () {
@@ -308,13 +295,30 @@ export default {
       }
     },
     viewImg (data) {
+      this.$router.push({
+        path: '/index/CustomerManage/ViewImg',
+        query: {
+          filePath: data.filePath
+        }
+      });
       console.log(data);
     }
   },
   computed: {
     ...mapGetters([
-      'navTabs'
+      'navTabs',
+      'activeTab'
     ])
+  },
+  watch: {
+    $route (to) {
+      if (to.fullPath === this.activeTab) {
+        this.custId = to.params.custId;
+      }
+    },
+    custId () {
+      this.getCompanyInfo();
+    }
   }
 };
 </script>

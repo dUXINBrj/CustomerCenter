@@ -49,7 +49,7 @@ export default {
     this.search(true);
   },
   activated () {
-    let path = this.$route.path;
+    let path = this.$route.fullPath;
     for (let item of this.navTabs) {
       if (item.route === path) {
         if (!item.exit) {

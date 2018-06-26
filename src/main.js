@@ -89,3 +89,6 @@ new Vue({
   components: { App },
   template: '<App/>'
 });
+
+// TODO keep-alive的组件销毁方法
+// TODO 标签页管理方法

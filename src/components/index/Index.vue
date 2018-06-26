@@ -31,11 +31,11 @@ import {mapGetters, mapActions} from 'vuex';
 export default {
   mounted () {
     // 刷新时以当前路由做为tab加入tabs
-    if (this.$route.path !== '/index/dashboard') {
+    if (this.$route.fullPath !== '/index/dashboard') {
       let routeInfo = {
         exist: false,
         closeable: true,
-        route: this.$route.path
+        route: this.$route.fullPath
       };
       if (this.$route.meta.getName === true) {
         routeInfo.name = this.$route.params.companyName;
@@ -44,7 +44,7 @@ export default {
       }
       this.$store.commit('addTabs', {route: '/index/dashboard', name: '首页', closeable: false});
       this.$store.commit('addTabs', routeInfo);
-      this.$store.commit('setActiveTabs', this.$route.path);
+      this.$store.commit('setActiveTabs', this.$route.fullPath);
     } else {
       this.$store.commit('addTabs', {route: '/index/dashboard', name: '首页', closeable: false});
       this.$store.commit('setActiveTabs', '/index/dashboard');
@@ -70,16 +70,16 @@ export default {
     '$route' (to) {
       let flag = true;
       for (let item of this.navTabs) {
-        if (item.route === to.path) {
-          this.$store.commit('changeTabStatu', to.path);
-          this.$store.commit('setActiveTabs', to.path);
+        if (item.route === to.fullPath) {
+          this.$store.commit('changeTabStatu', to.fullPath);
+          this.$store.commit('setActiveTabs', to.fullPath);
           flag = false;
           break;
         }
       }
       if (flag) {
         let routeInfo = {
-          route: to.path,
+          route: to.fullPath,
           exist: false
         };
         if (to.meta.getName === true) {
@@ -87,13 +87,13 @@ export default {
         } else {
           routeInfo.name = to.name;
         }
-        if (to.path === '/index/dashboard') {
+        if (to.fullPath === '/index/dashboard') {
           routeInfo.closeable = false;
         } else {
           routeInfo.closeable = true;
         }
         this.$store.commit('addTabs', routeInfo);
-        this.$store.commit('setActiveTabs', to.path);
+        this.$store.commit('setActiveTabs', to.fullPath);
       }
     }
   }
