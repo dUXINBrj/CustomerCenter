@@ -118,10 +118,14 @@ export default {
     getUserList () {
       this.saveSearchData.page = this.user.currentPage;
       this.saveSearchData.rows = this.user.rows;
+      let params = {};
+      for (let i in this.saveSearchData) {
+        params[i] = this.saveSearchData[i];
+      }
       this.$request(
         this.$api.getRbUserTable,
         'POST',
-        this.saveSearchData
+        params
       ).then(res => {
         this.loading = false;
         this.user.total = res.responseDate.totalCount;
@@ -134,10 +138,14 @@ export default {
     getCompanyList () {
       this.saveSearchData.page = this.company.currentPage;
       this.saveSearchData.rows = this.company.rows;
+      let params = {};
+      for (let i in this.saveSearchData) {
+        params[i] = this.saveSearchData[i];
+      }
       this.$request(
         this.$api.getRbCompanyTable,
         'POST',
-        this.saveSearchData
+        params
       ).then(res => {
         this.loading = false;
         this.company.total = res.responseDate.totalCount;

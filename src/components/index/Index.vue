@@ -109,7 +109,12 @@ export default {
     height: 100%;
   }
   .el-header {
-    background: #163254;
+    background: -webkit-linear-gradient(to right bottom, #e8962e, #e45131);
+    background: -o-linear-gradient(to right bottom, #e8962e, #e45131);
+    background: -moz-linear-gradient(to right bottom, #e8962e, #e45131);
+    background: -ms-linear-gradient(to right bottom, #e8962e, #e45131);
+    background: linear-gradient(to right bottom, #e8962e, #e45131);
+    filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e8962e,endColorStr=#e45131);
     padding: 0;
   }
   .el-aside {

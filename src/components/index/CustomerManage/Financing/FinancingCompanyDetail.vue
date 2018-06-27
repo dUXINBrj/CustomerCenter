@@ -92,7 +92,7 @@
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[0].filePath">
                     <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[0])">查看</a>
-                    <a href="javascript:void (0)">下载</a>
+                    <a href="javascript:void (0)" @click="downloadFile(baseInfo.attachVos[0])">下载</a>
                   </div>
                   <div v-if="!baseInfo.attachVos[0].filePath">
                     暂无
@@ -105,7 +105,7 @@
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[2].filePath">
                     <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[2])">查看</a>
-                    <a href="javascript:void (0)">下载</a>
+                    <a href="javascript:void (0)" @click="downloadFile(baseInfo.attachVos[2])">下载</a>
                   </div>
                   <div v-if="!baseInfo.attachVos[2].filePath">
                     暂无
@@ -118,7 +118,7 @@
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[4].filePath">
                     <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[4])">查看</a>
-                    <a href="javascript:void (0)">下载</a>
+                    <a href="javascript:void (0)" @click="downloadFile(baseInfo.attachVos[4])">下载</a>
                   </div>
                   <div v-if="!baseInfo.attachVos[4].filePath">
                     暂无
@@ -131,7 +131,7 @@
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[6].filePath">
                     <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[6])">查看</a>
-                    <a href="javascript:void (0)">下载</a>
+                    <a href="javascript:void (0)" @click="downloadFile(baseInfo.attachVos[6])">下载</a>
                   </div>
                   <div v-if="!baseInfo.attachVos[6].filePath">
                     暂无
@@ -144,7 +144,7 @@
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[8].filePath">
                     <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[8])">查看</a>
-                    <a href="javascript:void (0)">下载</a>
+                    <a href="javascript:void (0)" @click="downloadFile(baseInfo.attachVos[8])">下载</a>
                   </div>
                   <div v-if="!baseInfo.attachVos[8].filePath">
                     暂无
@@ -161,7 +161,7 @@
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[1].filePath">
                     <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[1])">查看</a>
-                    <a href="javascript:void (0)">下载</a>
+                    <a href="javascript:void (0)" @click="downloadFile(baseInfo.attachVos[1])">下载</a>
                   </div>
                   <div v-if="!baseInfo.attachVos[1].filePath">
                     暂无
@@ -174,7 +174,7 @@
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[3].filePath">
                     <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[3])">查看</a>
-                    <a href="javascript:void (0)">下载</a>
+                    <a href="javascript:void (0)" @click="downloadFile(baseInfo.attachVos[3])">下载</a>
                   </div>
                   <div v-if="!baseInfo.attachVos[3].filePath">
                     暂无
@@ -187,7 +187,7 @@
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[5].filePath">
                     <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[5])">查看</a>
-                    <a href="javascript:void (0)">下载</a>
+                    <a href="javascript:void (0)" @click="downloadFile(baseInfo.attachVos[5])">下载</a>
                   </div>
                   <div v-if="!baseInfo.attachVos[5].filePath">
                     暂无
@@ -200,7 +200,7 @@
                 <el-col :span="7">
                   <div v-if="baseInfo.attachVos[7].filePath">
                     <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[7])">查看</a>
-                    <a href="javascript:void (0)">下载</a>
+                    <a href="javascript:void (0)" @click="downloadFile(baseInfo.attachVos[7])">下载</a>
                   </div>
                   <div v-if="!baseInfo.attachVos[7].filePath">
                     暂无
@@ -294,14 +294,27 @@ export default {
         default: return '---'; break;
       }
     },
+    downloadFile (data) {
+      let params = {
+        fileUrl: data.filePath,
+        fileName: data.fileName
+      };
+      this.$request(
+        this.$api.downloadFinacingFile,
+        'GET',
+        params
+      ).then(res => {}).catch(errMsg => {
+        this.loading = false;
+        this.$message.error(errMsg);
+      });
+    },
     viewImg (data) {
       this.$router.push({
-        path: '/index/CustomerManage/ViewImg',
-        query: {
+        name: '图片浏览',
+        params: {
           filePath: data.filePath
         }
       });
-      console.log(data);
     }
   },
   computed: {

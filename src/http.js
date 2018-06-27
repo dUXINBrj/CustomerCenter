@@ -21,8 +21,8 @@ export default function Request (url, method, data) {
       }
       resolve(res.data);
     }).catch(err => function () {
-      Message.error('网络连接失败,请稍后再试!');
       console.log(err);
+      Message.error('网络连接失败,请稍后再试!');
     });
   });
 }

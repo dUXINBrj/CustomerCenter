@@ -4,12 +4,12 @@
       <el-row :gutter="20">
         <el-col :span="8">
           <el-form-item label="登录名">
-            <el-input size="mini" clearable maxlength="50" v-model="searchData.loginAccount" placeholder="请输入登录名"></el-input>
+            <el-input size="mini" clearable maxlength="50" v-model="searchData.loginAccount"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="8">
           <el-form-item label="企业名称">
-            <el-select size="mini" clearable filterable  v-model="searchData.companyName" placeholder="请选择企业名称">
+            <el-select size="mini" clearable filterable  v-model="searchData.companyName" placeholder="全部">
               <el-option v-for="item in companyOption"
                          :key="item.custId"
                          :label="item.companyName"

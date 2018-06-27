@@ -4,12 +4,12 @@
       <el-row :gutter="20">
         <el-col :span="8">
           <el-form-item label="登录名" prop="loginAccount">
-            <el-input size="mini" clearable maxlength="50" v-model="searchData.loginAccount" placeholder="请输入登录名"></el-input>
+            <el-input size="mini" clearable maxlength="50" v-model="searchData.loginAccount"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="8">
           <el-form-item label="企业名称" prop="company">
-            <el-select size="mini" clearable filterable  v-model="searchData.companyName" placeholder="请选择企业名称">
+            <el-select size="mini" clearable filterable  v-model="searchData.companyName" placeholder="全部">
               <el-option v-for="item in companyOption"
                          :key="item.custId"
                          :label="item.companyName"
@@ -20,7 +20,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="企业信息状态" prop="company">
-            <el-select size="mini" clearable filterable  v-model="searchData.custState" placeholder="请选择企业信息状态">
+            <el-select size="mini" clearable filterable  v-model="searchData.custState" placeholder="全部">
               <el-option v-for="(item, key) in companyCusStatu"
                          :key="item"
                          :label="key"
@@ -33,7 +33,7 @@
       <el-row :gutter="20">
         <el-col :span="8">
           <el-form-item label="信息认证状态" prop="company">
-            <el-select size="mini" clearable filterable  v-model="searchData.infoAuth" placeholder="请选择信息认证状态">
+            <el-select size="mini" clearable filterable  v-model="searchData.infoAuth" placeholder="全部">
               <el-option v-for="(item, key) in companyAuthstatus"
                          :key="item"
                          :label="key"
@@ -45,10 +45,10 @@
         <el-col :span="8">
           <el-form-item label="注册时间" prop="pass">
             <el-date-picker
+              :editable="false"
               size="mini"
               v-model="searchData.startTime"
               type="date"
-              placeholder="选择开始日期"
               value-format="timestamp"
               :picker-options="dateOptions">
             </el-date-picker>
@@ -57,10 +57,10 @@
         <el-col :span="8">
           <el-form-item label="至" prop="endTime">
             <el-date-picker
+              :editable="false"
               size="mini"
               v-model="searchData.endTime"
               type="date"
-              placeholder="选择结束日期"
               value-format="timestamp"
               :picker-options="dateOptions">
             </el-date-picker>
@@ -70,7 +70,7 @@
       <el-row :gutter="20">
         <el-col :span="8">
           <el-form-item label="所属地市" prop="company">
-            <el-select size="mini" clearable filterable  v-model="searchData.areaInfo" placeholder="请选择所属地市">
+            <el-select size="mini" clearable filterable  v-model="searchData.areaInfo" placeholder="全部">
               <el-option v-for="(item,key) in areaCityOption"
                          :key="key"
                          :label="item"
@@ -98,7 +98,7 @@ export default {
         callback();
       } else if (this.searchData.startTime !== '' && typeof this.searchData.startTime !== 'object') {
         if (value < this.searchData.startTime) {
-          callback(new Error('结束时间不能小于开始时间!'));
+          callback(new Error('开始时间不能大于结束时间!'));
         } else {
           callback();
         }

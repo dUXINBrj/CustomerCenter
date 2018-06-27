@@ -16,16 +16,19 @@ export default {
     this.imgPath = this.$route.query.filePath;
   },
   activated () {
-    let path = this.$route.fullPath;
-    for (let item of this.navTabs) {
-      if (item.route === path) {
-        if (!item.exit) {
-          let num = Math.floor(Math.random() * 100000);
-          num = num.toString();
-          this.imgPath = this.$route.query.filePath + '?' + num;
-        }
-        break;
-      }
+  //    let path = this.$route.fullPath;
+  //    for (let item of this.navTabs) {
+  //      if (item.route === path) {
+  //        if (!item.exit) {
+  //          let num = Math.floor(Math.random() * 100000);
+  //          num = num.toString();
+  //          this.imgPath = this.$route.query.filePath + '?' + num;
+  //        }
+  //        break;
+  //      }
+  //    }
+    if (this.$route.params.filePath && this.$route.params.filePath !== this.imgPath) {
+      this.imgPath = this.$route.params.filePath;
     }
   },
   methods: {
@@ -41,15 +44,15 @@ export default {
       'navTabs',
       'activeTab'
     ])
-  },
-  watch: {
-    $route (to) {
-      if (to.fullPath === this.activeTab) {
-        this.loading = true;
-        this.imgPath = to.query.filePath + '?' + Math.floor(Math.random() * 100000);
-      }
-    }
   }
+//  watch: {
+//    $route (to) {
+//      if (to.fullPath === this.activeTab) {
+//        this.loading = true;
+//        this.imgPath = to.query.filePath + '?' + Math.floor(Math.random() * 100000);
+//      }
+//    }
+//  }
 };
 </script>
 <style scoped>

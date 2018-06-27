@@ -35,3 +35,11 @@ body, html{
   background: #c6d2e9;
   color: #666;
 }
+.el-tabs__item {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+.card-top > span {
+  color: #666;
+}

@@ -31,7 +31,8 @@ import {
   TableColumn,
   Pagination,
   Loading,
-  Message
+  Message,
+  Card
 } from 'element-ui';
 import './assets/common/css/common.css';
 import './assets/common/css/animate.css';
@@ -39,6 +40,7 @@ import vuescroll from 'vuescroll';
 import * as ApiPath from '@/api';
 import * as filters from '@/assets/common/js/filter';
 import Request from '@/http';
+import common from '@/assets/common/js/common.js';
 process.env.MOCK && require('@/mock');
 
 Vue.use(vuescroll);
@@ -66,6 +68,7 @@ Vue.use(Table);
 Vue.use(TableColumn);
 Vue.use(Pagination);
 Vue.use(Loading);
+Vue.use(Card);
 
 Vue.config.productionTip = false;
 
@@ -75,6 +78,7 @@ Vue.prototype.$request = Request;
 Vue.prototype.$Qs = qs;
 Vue.prototype.$api = ApiPath;
 Vue.prototype.$message = Message;
+Vue.prototype.$common = common;
 
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key]);

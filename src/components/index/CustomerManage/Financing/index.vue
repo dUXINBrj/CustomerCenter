@@ -111,8 +111,14 @@ export default {
       if (typeof this.saveSearchData.startTime === 'object') {
         this.saveSearchData.startTime = '';
       }
+      if (this.saveSearchData.startTime) {
+        this.saveSearchData.startTime = this.$common.timeFormat(this.saveSearchData.startTime);
+      }
       if (typeof this.saveSearchData.endTime === 'object') {
         this.saveSearchData.endTime = '';
+      }
+      if (this.saveSearchData.endTime) {
+        this.saveSearchData.endTime = this.$common.timeFormat(this.saveSearchData.endTime);
       }
       if (both) {
         this.getUserList();
@@ -128,10 +134,14 @@ export default {
     getUserList () {
       this.saveSearchData.page = this.user.currentPage;
       this.saveSearchData.rows = this.user.rows;
+      let params = {};
+      for (let i in this.saveSearchData) {
+        params[i] = this.saveSearchData[i];
+      }
       this.$http({
         url: this.$api.getFinacingUserTable,
         method: 'POST',
-        data: this.saveSearchData
+        data: params
       }).then(res => {
         this.loading = false;
         if (res.data.retCode !== 0) {
@@ -149,10 +159,14 @@ export default {
     getCompanyList () {
       this.saveSearchData.page = this.company.currentPage;
       this.saveSearchData.rows = this.company.rows;
+      let params = {};
+      for (let i in this.saveSearchData) {
+        params[i] = this.saveSearchData[i];
+      }
       this.$http({
         url: this.$api.getFinacingCompanyTable,
         method: 'POST',
-        data: this.saveSearchData
+        data: params
       }).then(res => {
         this.loading = false;
         if (res.data.retCode !== 0) {
