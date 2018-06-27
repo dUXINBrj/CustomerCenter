@@ -52,7 +52,7 @@ export default {
     let path = this.$route.fullPath;
     for (let item of this.navTabs) {
       if (item.route === path) {
-        if (!item.exit) {
+        if (!item.exist) {
           this.activeTab = 'one';
           this.resetSearch();
         }

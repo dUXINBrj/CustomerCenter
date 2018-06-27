@@ -300,6 +300,7 @@ export default {
   },
   mounted () {
     this.custId = this.$route.params.custId;
+    this.getCompanyInfo();
   },
   methods: {
     getCompanyInfo () {
@@ -313,6 +314,12 @@ export default {
       ).then(res => {
         this.loading = false;
         this.baseInfo = res.responseDate.companyDetailVo;
+        let data = {
+          name: 'RbData',
+          custId: this.custId,
+          data: res.responseDate.companyDetailVo
+        };
+        this.$store.commit('addDetailData', data);
       }).catch(errMsg => {
         this.loading = false;
         this.$message.error(errMsg);
@@ -352,17 +359,35 @@ export default {
   computed: {
     ...mapGetters([
       'navTabs',
-      'activeTab'
+      'activeTab',
+      'RbData'
     ])
   },
   watch: {
     $route (to) {
-      if (to.fullPath === this.activeTab) {
-        this.custId = to.params.custId;
+      if (to.name === 'RBCompanyDetail') {
+        let path = to.fullPath;
+        let flag = true;
+        for (let item of this.navTabs) {
+          if (item.route === path) {
+            if (!item.exist) {
+              flag = false;
+            }
+            break;
+          }
+        }
+        if (!flag) {
+          this.custId = to.params.custId;
+          this.getCompanyInfo();
+        } else {
+          if (this.RbData[to.params.custId]) {
+            this.baseInfo = this.RbData[to.params.custId];
+          } else {
+            this.custId = to.params.custId;
+            this.getCompanyInfo();
+          }
+        }
       }
-    },
-    custId () {
-      this.getCompanyInfo();
     }
   }
 };

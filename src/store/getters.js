@@ -13,5 +13,14 @@ export default {
   },
   activeTab: (state) => {
     return state.activeTab;
+  },
+  finacingData: (state) => {
+    return state.finacingData;
+  },
+  ecommerceData: (state) => {
+    return state.ecommerceData;
+  },
+  RbData: (state) => {
+    return state.RbData;
   }
 };

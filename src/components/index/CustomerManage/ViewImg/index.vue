@@ -19,7 +19,7 @@ export default {
   //    let path = this.$route.fullPath;
   //    for (let item of this.navTabs) {
   //      if (item.route === path) {
-  //        if (!item.exit) {
+  //        if (!item.exist) {
   //          let num = Math.floor(Math.random() * 100000);
   //          num = num.toString();
   //          this.imgPath = this.$route.query.filePath + '?' + num;

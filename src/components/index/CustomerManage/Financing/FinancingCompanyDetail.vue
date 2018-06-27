@@ -262,6 +262,7 @@ export default {
   },
   mounted () {
     this.custId = this.$route.params.custId;
+    this.getCompanyInfo();
   },
   methods: {
     getCompanyInfo () {
@@ -275,6 +276,12 @@ export default {
       ).then(res => {
         this.loading = false;
         this.baseInfo = res.responseDate.companyInfoDetail;
+        let data = {
+          name: 'finacingData',
+          custId: this.custId,
+          data: res.responseDate.companyInfoDetail
+        };
+        this.$store.commit('addDetailData', data);
       }).catch(errMsg => {
         this.loading = false;
         this.$message.error(errMsg);
@@ -320,19 +327,43 @@ export default {
   computed: {
     ...mapGetters([
       'navTabs',
-      'activeTab'
+      'activeTab',
+      'finacingData'
     ])
   },
   watch: {
     $route (to) {
-      if (to.fullPath === this.activeTab) {
-        this.custId = to.params.custId;
+      /* 使用vuex保存详情页页面数据 实现切换tab页后不重新向后台获取数据 */
+      // 判断当前路由是否前往详情页
+      // 判断当前tab是否之前已经打开
+      // 打开的情况下判断vuex是否存有相关数据 如果有直接加载 没有则向后台请求
+      // 没打开的情况直接向后台请求
+      if (to.name === 'FinancingCompanyDetail') {
+        let path = to.fullPath;
+        let flag = true;
+        for (let item of this.navTabs) {
+          if (item.route === path) {
+            if (!item.exist) {
+              flag = false;
+            }
+            break;
+          }
+        }
+        if (!flag) {
+          this.custId = to.params.custId;
+          this.getCompanyInfo();
+        } else {
+          if (this.finacingData[to.params.custId]) {
+            this.baseInfo = this.finacingData[to.params.custId];
+          } else {
+            this.custId = to.params.custId;
+            this.getCompanyInfo();
+          }
+        }
       }
-    },
-    custId () {
-      this.getCompanyInfo();
     }
   }
+  // TODO custId是否会有重复的情况
 };
 </script>
 <style scoped>

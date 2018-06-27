@@ -5,7 +5,10 @@ const state = {
   asideWidth: '200px',
   count: 20,
   navTabs: [],
-  activeTab: ''
+  activeTab: '',
+  finacingData: {},
+  ecommerceData: {},
+  RbData: {}
 };
 
 const mutations = {
@@ -29,7 +32,7 @@ const mutations = {
   changeTabStatu (state, path) {
     for (let item of state.navTabs) {
       if (item.route === path) {
-        item.exit = true;
+        item.exist = true;
         break;
       }
     }
@@ -43,6 +46,14 @@ const mutations = {
       index++;
     }
     state.navTabs.splice(index, 1);
+  },
+  addDetailData (state, data) {
+    state[data.name][data.custId] = data.data;
+  },
+  deleteDetailData (state, data) {
+    if (state[data.name][data.custId]) {
+      delete state[data.name][data.custId];
+    }
   }
 };
 
