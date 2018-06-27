@@ -11,7 +11,7 @@
             size="mini"
             type="date"
             value-format="timestamp"
-            placeholder="">
+            placeholder="开始时间">
           </el-date-picker>
           -
           <el-date-picker
@@ -20,7 +20,7 @@
             size="mini"
             type="date"
             value-format="timestamp"
-            placeholder="">
+            placeholder="结束时间">
           </el-date-picker>
           <el-button size="mini" type="primary" @click="checkTime">确定</el-button>
         </div>
