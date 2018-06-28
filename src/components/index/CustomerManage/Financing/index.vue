@@ -144,8 +144,10 @@ export default {
         data: params
       }).then(res => {
         this.loading = false;
-        if (res.data.retCode !== 0) {
-          this.$message.error('获取账户列表失败:' + res.data.retMessage);
+        let code = res.data.retCode;
+        code = code * 1;
+        if (code !== 0) {
+          this.$message.error('获取用户列表失败:' + res.data.retMessage);
           return false;
         }
         this.user.total = res.data.responseDate.totalCount;
@@ -169,8 +171,10 @@ export default {
         data: params
       }).then(res => {
         this.loading = false;
-        if (res.data.retCode !== 0) {
-          this.$message.error('获取账户列表失败:' + res.data.retMessage);
+        let code = res.data.retCode;
+        code = code * 1;
+        if (code !== 0) {
+          this.$message.error('获取企业列表失败:' + res.data.retMessage);
           return false;
         }
         this.company.total = res.data.responseDate.totalCount;

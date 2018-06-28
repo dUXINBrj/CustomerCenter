@@ -122,17 +122,24 @@ export default {
       for (let i in this.saveSearchData) {
         params[i] = this.saveSearchData[i];
       }
-      this.$request(
-        this.$api.getRbUserTable,
-        'POST',
-        params
-      ).then(res => {
+      this.$http({
+        url: this.$api.getRbUserTable,
+        method: 'POST',
+        data: params
+      }).then(res => {
         this.loading = false;
-        this.user.total = res.responseDate.totalCount;
-        this.user.tableData = res.responseDate.accountVoList;
-      }).catch(errMsg => {
+        let code = res.data.retCode;
+        code = code * 1;
+        if (code !== 0) {
+          this.$message.error('获取用户列表失败:' + res.data.retMessage);
+          return false;
+        }
+        this.user.total = res.data.responseDate.totalCount;
+        this.user.tableData = res.data.responseDate.accountVoList;
+      }).catch(err => {
         this.loading = false;
-        this.$message.error(errMsg);
+        this.$message.error('网络连接失败，请稍后重试！');
+        console.log(err);
       });
     },
     getCompanyList () {
@@ -142,17 +149,24 @@ export default {
       for (let i in this.saveSearchData) {
         params[i] = this.saveSearchData[i];
       }
-      this.$request(
-        this.$api.getRbCompanyTable,
-        'POST',
-        params
-      ).then(res => {
+      this.$http({
+        url: this.$api.getRbCompanyTable,
+        method: 'POST',
+        data: params
+      }).then(res => {
         this.loading = false;
-        this.company.total = res.responseDate.totalCount;
-        this.company.tableData = res.responseDate.companyVoList;
-      }).catch(errMsg => {
+        let code = res.data.retCode;
+        code = code * 1;
+        if (code !== 0) {
+          this.$message.error('获取用户列表失败:' + res.data.retMessage);
+          return false;
+        }
+        this.company.total = res.data.responseDate.totalCount;
+        this.company.tableData = res.data.responseDate.companyVoList;
+      }).catch(err => {
         this.loading = false;
-        this.$message.error(errMsg);
+        this.$message.error('网络连接失败，请稍后重试！');
+        console.log(err);
       });
     },
     changeTab (el) {

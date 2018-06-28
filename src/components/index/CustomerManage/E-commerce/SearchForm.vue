@@ -22,9 +22,9 @@
           <el-form-item label="企业信息状态" prop="company">
             <el-select size="mini" clearable filterable  v-model="searchData.custState" placeholder="全部">
               <el-option v-for="(item, key) in companyCusStatu"
-                         :key="item"
-                         :label="key"
-                         :value="item">
+                         :key="key"
+                         :label="item"
+                         :value="key">
               </el-option>
             </el-select>
           </el-form-item>
@@ -35,9 +35,9 @@
           <el-form-item label="信息认证状态" prop="company">
             <el-select size="mini" clearable filterable  v-model="searchData.infoAuth" placeholder="全部">
               <el-option v-for="(item, key) in companyAuthstatus"
-                         :key="item"
-                         :label="key"
-                         :value="item">
+                         :key="key"
+                         :label="item"
+                         :value="key">
               </el-option>
             </el-select>
           </el-form-item>
@@ -79,7 +79,7 @@
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="8">
+        <el-col :span="8" style="text-align: center">
           <el-form-item>
             <el-button type="primary" size="mini" @click="search" :loading="loading">查询</el-button>
             <el-button type="warning" size="mini" @click="resetSearch" :loading="loading">重置</el-button>
@@ -148,47 +148,74 @@ export default {
   },
   methods: {
     getCompany () {
-      this.$request(
-        this.$api.getFinacingCompany,
-        'POST',
-        {clientType: 2}
-      ).then(res => {
-        this.companyOption = res.responseDate.companys;
-      }).catch(errMsg => {
-        this.$message.error(errMsg);
+      this.$http({
+        url: this.$api.getFinacingCompany + '?clientType=2',
+        method: 'POST'
+      }).then(res => {
+        this.loading = false;
+        let code = res.data.retCode;
+        code = code * 1;
+        if (code !== 0) {
+          return false;
+        }
+        this.companyOption = res.data.responseDate.companys;
+      }).catch(err => {
+        this.loading = false;
+        console.log(err);
       });
     },
     getCompanyCusStatu () {
-      this.$request(
-        this.$api.getCompanyCusStatu,
-        'POST',
-        {clientType: 2}
-      ).then(res => {
-        this.companyCusStatu = res.responseDate.custStatus;
-      }).catch(errMsg => {
-        this.$message.error(errMsg);
+      this.$http({
+        url: this.$api.getCompanyCusStatu,
+        method: 'POST',
+        data: {clientType: 2}
+      }).then(res => {
+        this.loading = false;
+        let code = res.data.retCode;
+        code = code * 1;
+        if (code !== 0) {
+          return false;
+        }
+        this.companyCusStatu = res.data.responseDate.custStatus;
+      }).catch(err => {
+        this.loading = false;
+        console.log(err);
       });
     },
     getCompanyAuthstatus () {
-      this.$request(
-        this.$api.getCompanyAuthstatus,
-        'POST',
-        {clientType: 2}
-      ).then(res => {
-        this.companyAuthstatus = res.responseDate.infoAuthStatus;
-      }).catch(errMsg => {
-        this.$message.error(errMsg);
+      this.$http({
+        url: this.$api.getCompanyAuthstatus,
+        method: 'POST',
+        data: {clientType: 2}
+      }).then(res => {
+        this.loading = false;
+        let code = res.data.retCode;
+        code = code * 1;
+        if (code !== 0) {
+          return false;
+        }
+        this.companyAuthstatus = res.data.responseDate.infoAuthStatus;
+      }).catch(err => {
+        this.loading = false;
+        console.log(err);
       });
     },
     getAreaCity () {
-      this.$request(
-        this.$api.getAreaCity,
-        'POST',
-        {}
-      ).then(res => {
-        this.areaCityOption = res.responseDate.areaInfos;
-      }).catch(errMsg => {
-        this.$message.error(errMsg);
+      this.$http({
+        url: this.$api.getAreaCity,
+        method: 'POST',
+        data: {clientType: 2}
+      }).then(res => {
+        this.loading = false;
+        let code = res.data.retCode;
+        code = code * 1;
+        if (code !== 0) {
+          return false;
+        }
+        this.areaCityOption = res.data.responseDate.areaInfos;
+      }).catch(err => {
+        this.loading = false;
+        console.log(err);
       });
     },
     search () {
@@ -220,5 +247,8 @@ export default {
   }
   .el-form {
     padding: 10px;
+  }
+  .el-date-editor.el-input, .el-date-editor.el-input__inner {
+    width: 193px;
   }
 </style>

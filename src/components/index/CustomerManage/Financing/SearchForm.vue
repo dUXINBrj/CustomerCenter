@@ -96,14 +96,20 @@ export default {
   },
   methods: {
     getFinacingCompany () {
-      this.$request(
-        this.$api.getFinacingCompany,
-        'POST',
-        {clientType: 1}
-      ).then(res => {
-        this.companyOption = res.responseDate.companys;
-      }).catch(errMsg => {
-        this.$message.error(errMsg);
+      this.$http({
+        url: this.$api.getFinacingCompany + '?clientType=1',
+        method: 'POST'
+      }).then(res => {
+        this.loading = false;
+        let code = res.data.retCode;
+        code = code * 1;
+        if (code !== 0) {
+          return false;
+        }
+        this.companyOption = res.data.responseDate.companys;
+      }).catch(err => {
+        this.loading = false;
+        console.log(err);
       });
     },
     search () {

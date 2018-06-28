@@ -55,10 +55,12 @@ export default {
     Aside,
     Nav
   },
-  methods: mapActions([
-    'increment',
-    'hideAside'
-  ]),
+  methods: {
+    ...mapActions([
+      'increment',
+      'hideAside'
+    ])
+  },
   computed: {
     ...mapGetters([
       'count',

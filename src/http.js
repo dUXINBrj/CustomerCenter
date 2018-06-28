@@ -1,6 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
 import { Message } from 'element-ui';
+axios.defaults.headers.post['Content-Type'] = 'application/json; charset=UTF-8';
 
 export default function Request (url, method, data) {
   if (method) {
@@ -15,7 +16,9 @@ export default function Request (url, method, data) {
       method: method,
       data: qs.stringify(data)
     }).then(res => {
-      if (res.data.retCode !== 0) {
+      let code = res.data.retCode;
+      code = code * 1;
+      if (code !== 0) {
         reject(res.data.retMessage);
         return false;
       }

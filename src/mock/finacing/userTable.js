@@ -34,8 +34,8 @@ Mock.mock(ApiPath.getFinacingCompanyTable, 'post', {
   'retMessage': 'success'
 });
 
-Mock.mock(ApiPath.getFinacingCompany, 'post', {
-  'retCode': 0,
+Mock.mock(ApiPath.getFinacingCompany + '?clientType=1', 'post', {
+  'retCode': '0',
   'responseDate': {
     'companys|1-20': [{
       'custId|+1': 1,

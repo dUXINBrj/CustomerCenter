@@ -1,18 +1,18 @@
-export const getFinacingUserTable = '/userinfo/jfptuserinfo';
-export const getFinacingCompanyTable = '/company/jfptcompany';
-export const getFinacingCompany = '/company/getcompanyname';
-export const getFinacingCompanyDetail = '/company/jfptcompanydetail';
-export const downloadFinacingFile = '/company/jfptfiledownload'; // get
+export const getFinacingUserTable = '/customerCenterManager/userinfo/jfptuserinfo';
+export const getFinacingCompanyTable = '/customerCenterManager/company/jfptcompany';
+export const getFinacingCompany = '/customerCenterManager/company/getcompanyquery';
+export const getFinacingCompanyDetail = '/customerCenterManager/company/jfptcompanydetail';
+export const downloadFinacingFile = '/customerCenterManager/company/jfptfiledownload'; // get
 
-export const getECommerceUserTable = '/userinfo/dsptuserinfo';
-export const getCompanyCusStatu = '/company/custStatus';
-export const getCompanyAuthstatus = '/company/infoauthstatus';
-export const getAreaCity = '/company/dsptareainfoquery';
-export const getECommerceCompanyTable = '/company/dsptcompany';
-export const getECommerceCompanyDetail = '/company/dsptcompanydetail';
-export const downloadECommerceFile = '/company/dsptfiledownload'; // get
+export const getECommerceUserTable = '/customerCenterManager/userinfo/dsptuserinfo';
+export const getCompanyCusStatu = '/customerCenterManager/company/custStatus';
+export const getCompanyAuthstatus = '/customerCenterManager/company/infoauthstatus';
+export const getAreaCity = '/customerCenterManager/company/dsptareainfoquery';
+export const getECommerceCompanyTable = '/customerCenterManager/company/dsptcompany';
+export const getECommerceCompanyDetail = '/customerCenterManager/company/dsptcompanydetail';
+export const downloadECommerceFile = '/customerCenterManager/company/dsptfiledownload'; // get
 
-export const getRbUserTable = '/userinfo/rbptuserinfo';
-export const getRbCompanyTable = '/company/rbptcompany';
-export const getRbCompanyDetail = '/company/rbptcompanydetail';
-export const downloadRBFile = '/company/rbptfiledownload'; // get
+export const getRbUserTable = '/customerCenterManager/userinfo/rbptuserinfo';
+export const getRbCompanyTable = '/customerCenterManager/company/rbptcompany';
+export const getRbCompanyDetail = '/customerCenterManager/company/rbptcompanydetail';
+export const downloadRBFile = '/customerCenterManager/company/rbptfiledownload'; // get

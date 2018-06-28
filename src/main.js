@@ -72,7 +72,7 @@ Vue.use(Card);
 
 Vue.config.productionTip = false;
 
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+axios.defaults.headers.post['Content-Type'] = 'application/json; charset=UTF-8';
 Vue.prototype.$http = axios;
 Vue.prototype.$request = Request;
 Vue.prototype.$Qs = qs;

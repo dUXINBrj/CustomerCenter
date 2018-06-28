@@ -269,22 +269,29 @@ export default {
       let params = {
         'custId': this.custId
       };
-      this.$request(
-        this.$api.getFinacingCompanyDetail,
-        'POST',
-        params
-      ).then(res => {
+      this.$http({
+        url: this.$api.getFinacingCompanyDetail + '?custId=' + this.custId,
+        method: 'POST',
+        data: params
+      }).then(res => {
         this.loading = false;
-        this.baseInfo = res.responseDate.companyInfoDetail;
+        let code = res.data.retCode;
+        code = code * 1;
+        if (code !== 0) {
+          this.$message.error('获取企业信息失败:' + res.data.retMessage);
+          return false;
+        }
+        this.baseInfo = res.data.responseDate.companyInfoDetail;
         let data = {
           name: 'finacingData',
           custId: this.custId,
-          data: res.responseDate.companyInfoDetail
+          data: res.data.responseDate.companyInfoDetail
         };
         this.$store.commit('addDetailData', data);
-      }).catch(errMsg => {
+      }).catch(err => {
         this.loading = false;
-        this.$message.error(errMsg);
+        this.$message.error('网络连接失败，请稍后重试！');
+        console.log(err);
       });
     },
     indexMethod (index) {
@@ -306,13 +313,14 @@ export default {
         fileUrl: data.filePath,
         fileName: data.fileName
       };
-      this.$request(
-        this.$api.downloadFinacingFile,
-        'GET',
-        params
-      ).then(res => {}).catch(errMsg => {
+      this.$http({
+        url: this.$api.downloadFinacingFile,
+        method: 'GET',
+        data: params
+      }).then(res => {}).catch(err => {
         this.loading = false;
-        this.$message.error(errMsg);
+        this.$message.error('网络连接失败，请稍后重试！');
+        console.log(err);
       });
     },
     viewImg (data) {

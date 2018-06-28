@@ -14,7 +14,8 @@
         :show-overflow-tooltip="true"
         label="企业名称">
         <template slot-scope="scope">
-          <el-button @click.stop="Detail(scope.row)" type="text" size="small">{{scope.row.companyName}}</el-button>
+          <span v-if="scope.row.custId === null">{{scope.row.companyName}}</span>
+          <el-button v-if="scope.row.custId !== null" @click.stop="Detail(scope.row)" type="text" size="small">{{scope.row.companyName}}</el-button>
         </template>
       </el-table-column>
       <el-table-column
