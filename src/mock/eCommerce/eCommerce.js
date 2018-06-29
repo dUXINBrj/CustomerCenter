@@ -40,6 +40,17 @@ Mock.mock(ApiPath.getECommerceCompanyTable, 'post', {
   'retMessage': 'success'
 });
 
+Mock.mock(ApiPath.getFinacingCompany + '?clientType=2', 'post', {
+  'retCode': '0',
+  'responseDate': {
+    'companys|1-20': [{
+      'custId|+1': 1,
+      'companyName': '@CNAME'
+    }]
+  },
+  'retMessage': '操作成功'
+});
+
 Mock.mock(ApiPath.getCompanyCusStatu, 'post', {
   'retCode': 0,
   'responseDate': {

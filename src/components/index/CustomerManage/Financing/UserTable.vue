@@ -61,7 +61,7 @@ export default {
         case 1: return '融资平台'; break;
         case 2: return '电商平台'; break;
         case 3: return '荣邦'; break;
-        default: return '---'; break;
+        default: return ' '; break;
       }
     }
   }

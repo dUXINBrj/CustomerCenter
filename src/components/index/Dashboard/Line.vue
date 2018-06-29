@@ -4,25 +4,15 @@
       <div slot="header" class="clearfix card-top">
         <span>每月登录账户数量统计</span>
         <div class="dash-line-content">
-          <span class="time-error" v-if="timeError">开始时间不能大于结束时间</span>
-          <el-date-picker
-            v-model="startTime"
-            :editable="false"
-            size="mini"
-            type="date"
-            value-format="timestamp"
-            placeholder="开始时间">
-          </el-date-picker>
-          -
-          <el-date-picker
-            v-model="endTime"
-            :editable="false"
-            size="mini"
-            type="date"
-            value-format="timestamp"
-            placeholder="结束时间">
-          </el-date-picker>
-          <el-button size="mini" type="primary" @click="checkTime">确定</el-button>
+          统计范围：
+          <el-select v-model="timeType" placeholder="请选择" @change="getChartData" size="mini">
+            <el-option
+              v-for="item in timeTypeOption"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
         </div>
       </div>
       <div id="dashLine" ref="mychart"></div>
@@ -39,9 +29,23 @@ require('echarts/lib/component/legend');
 export default {
   data () {
     return {
-      startTime: '',
-      endTime: '',
-      timeError: false,
+      timeType: 1,
+      timeTypeOption: [{
+        value: 1,
+        label: '近一周'
+      }, {
+        value: 2,
+        label: '近一个月'
+      }, {
+        value: 3,
+        label: '近三个月'
+      }, {
+        value: 4,
+        label: '近半年'
+      }, {
+        value: 5,
+        label: '近一年'
+      }],
       Chart: {},
       Data: {
         finacing: 1,
@@ -113,36 +117,29 @@ export default {
       this.Chart = echarts.init(dom);
       this.Chart.setOption(this.option);
     },
-    checkTime () {
-      if (this.endTime !== '' && typeof this.endTime !== 'object') {
-        if (this.startTime !== '' && typeof this.startTime !== 'object') {
-          if (this.startTime > this.endTime) {
-            this.timeError = true;
-          } else {
-            this.timeError = false;
-          }
-        } else {
-          this.timeError = false;
-        }
-      } else {
-        this.timeError = false;
-      }
-      if (!this.timeError) {
-        this.getChartData();
-      }
-    },
     getChartData () {
-      let params = {
-        startTime: '',
-        endTime: ''
-      };
-      if (this.startTime !== '' && typeof this.startTime !== 'object') {
-        params.startTime = this.$common.timeFormat(this.startTime);
-      };
-      if (this.endTime !== '' && typeof this.endTime !== 'object') {
-        params.endTime = this.$common.timeFormat(this.endTime);
-      };
-      console.log(params);
+      let days = '';
+      switch (this.timeType) {
+        case 1: days = 7; break;
+        case 2: days = 30; break;
+        case 3: days = 90; break;
+        case 4: days = 183; break;
+        case 5: days = 365; break;
+        default: days = 7; break;
+      }
+      let end = new Date();
+      let start = new Date();
+      end.setTime(start.getTime() - 3600 * 1000 * 24);
+      end = Number(end);
+      end = this.$common.timeFormat(end);
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * days);
+      start = Number(start);
+      start = this.$common.timeFormat(start);
+      console.log(start, end);
+      /* let params = {
+        timeType: '',
+        time: ''
+      }; */
     }
   }
 };
@@ -172,10 +169,10 @@ export default {
     clear: both
   }
   #dashbord-line .el-card__header {
-    padding: 6px 20px;
+    padding: 5px 20px;
   }
-  .card-top {
-    font-size: 14px;
+  #dashbord-line .card-top {
+    line-height: 28px;
   }
   #dashbord-line {
     height: 100%;

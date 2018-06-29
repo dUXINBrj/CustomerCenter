@@ -53,7 +53,7 @@ export default new Router({
           component: ECommerceCompanyDetail,
           meta: {getName: true}
         },
-        {path: '/index/CustomerManage/RB/companyDetail/:custId/:companyName',
+        {path: '/index/CustomerManage/RB/companyDetail/:custId/:companyName/:companyId',
           name: 'RBCompanyDetail',
           component: RbCompanyDetail,
           meta: {getName: true}

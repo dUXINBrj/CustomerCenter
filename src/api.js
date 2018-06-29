@@ -16,3 +16,6 @@ export const getRbUserTable = '/customerCenterManager/userinfo/rbptuserinfo';
 export const getRbCompanyTable = '/customerCenterManager/company/rbptcompany';
 export const getRbCompanyDetail = '/customerCenterManager/company/rbptcompanydetail';
 export const downloadRBFile = '/customerCenterManager/company/rbptfiledownload'; // get
+
+export const findUserCount = '/customerCenterManager/count/findUserCountByClientType';
+export const findCustCount = '/customerCenterManager/count/findCustCountByClietType';

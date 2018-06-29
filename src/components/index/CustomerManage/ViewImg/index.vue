@@ -1,6 +1,7 @@
 <template>
   <div v-loading="loading">
-    <img :src="imgPath" alt="图片加载失败" @error="imgError" @load="imgLoad">
+    <iframe :src="imgPath" frameborder="0"></iframe>
+    <!--<img :src="imgPath" alt="图片加载失败" @error="imgError" @load="imgLoad">-->
   </div>
 </template>
 <script>
@@ -9,7 +10,7 @@ export default {
   data () {
     return {
       imgPath: '',
-      loading: true
+      loading: false
     };
   },
   mounted () {
@@ -30,6 +31,7 @@ export default {
     if (this.$route.params.filePath && this.$route.params.filePath !== this.imgPath) {
       this.imgPath = this.$route.params.filePath;
     }
+    console.log(1);
   },
   methods: {
     imgError () {

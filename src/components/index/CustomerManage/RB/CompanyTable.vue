@@ -45,7 +45,8 @@ export default {
         name: 'RBCompanyDetail',
         params: {
           custId: data.custId,
-          companyName: data.companyName
+          companyName: data.companyName,
+          companyId: data.companyId
         }
       });
     },
@@ -57,7 +58,7 @@ export default {
         case 0: return '运营商'; break;
         case 1: return '企业会员'; break;
         case 2: return '个人会员'; break;
-        default: return '---'; break;
+        default: return ' '; break;
       }
     }
   }

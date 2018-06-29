@@ -258,7 +258,7 @@ export default {
   methods: {
     getCompanyInfo () {
       this.$http({
-        url: this.$api.getECommerceCompanyDetail + '?custId=' + this.custId,
+        url: this.$api.getECommerceCompanyDetail,
         method: 'POST'
       }).then(res => {
         this.loading = false;
@@ -296,14 +296,9 @@ export default {
       }
     },
     downloadFile (data) {
-      let params = {
-        fileUrl: data.filePath,
-        fileName: data.fileName
-      };
       this.$http({
-        url: this.$api.downloadFinacingFile,
-        method: 'GET',
-        data: params
+        url: this.$api.downloadFinacingFile + '?fileUrl=' + data.filePath + '&fileName=' + data.attachName,
+        method: 'GET'
       }).then(res => {}).catch(err => {
         this.loading = false;
         this.$message.error('网络连接失败，请稍后重试！');
@@ -311,7 +306,12 @@ export default {
       });
     },
     viewImg (data) {
-      console.log(data);
+      this.$router.push({
+        name: '图片浏览',
+        params: {
+          filePath: data.filePath
+        }
+      });
     }
   },
   computed: {

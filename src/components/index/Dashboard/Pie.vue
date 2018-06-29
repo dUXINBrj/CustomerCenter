@@ -1,6 +1,6 @@
 <template>
   <div id="dashbord-pie">
-    <el-card class="box-card" shadow="hover">
+    <el-card class="box-card" shadow="hover" v-loading="loading">
       <div slot="header" class="clearfix card-top">
         <span>注册账号统计及占比</span>
       </div>
@@ -19,11 +19,15 @@ export default {
   mounted () {
     this.initCharts();
   },
+  activated () {
+    this.getCountData();
+  },
   data () {
     return {
+      loading: false,
       PieChart: {},
       pieData: {
-        finacing: 1,
+        finacing: 0,
         ecommerce: 0,
         rb: 0
       },
@@ -87,25 +91,37 @@ export default {
       let dom = this.$refs.mychart;
       this.PieChart = echarts.init(dom);
       this.PieChart.setOption(this.option);
+    },
+    getCountData () {
+      this.loading = true;
+      this.$http({
+        url: this.$api.findUserCount,
+        method: 'POST'
+      }).then(res => {
+        this.loading = false;
+        let code = res.data.retCode;
+        code = code * 1;
+        if (code !== 0) {
+          return false;
+        }
+        this.pieData.finacing = res.data.responseDate.counts[0].count;
+        this.pieData.ecommerce = res.data.responseDate.counts[1].count;
+        this.pieData.rb = res.data.responseDate.counts[2].count;
+      }).catch(err => {
+        this.loading = false;
+        console.log(err);
+      });
     }
   },
   watch: {
     pieData: {
       handler (options) {
-        // 没有有相关数据的情况下给echarts标题 并置空data
-        if (options.finacing === 0 && options.ecommerce === 0 && options.rb === 0) {
-          this.option.series[0].data = [];
-          this.option.title.text = '暂无数据';
-          this.PieChart.setOption(this.option);
-        } else {
-          this.option.series[0].data = [
-            {value: options.fireCount, name: '融资平台'},
-            {value: options.warningCount, name: '电商平台'},
-            {value: options.errorCount, name: '荣邦'}
-          ];
-          this.option.title.text = null;
-          this.PieChart.setOption(this.option);
-        }
+        this.option.series[0].data = [
+          {value: options.finacing, name: '融资平台'},
+          {value: options.ecommerce, name: '电商平台'},
+          {value: options.rb, name: '荣邦'}
+        ];
+        this.PieChart.setOption(this.option);
       },
       deep: true
     }

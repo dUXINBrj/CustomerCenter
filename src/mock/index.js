@@ -1,6 +1,7 @@
 require('@/mock/finacing/userTable');
 require('@/mock/eCommerce/eCommerce');
 require('@/mock/RB/RB');
+require('@/mock/dashboard/count');
 
 const Mock = require('mockjs');
 

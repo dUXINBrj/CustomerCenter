@@ -1,6 +1,6 @@
 <template>
   <div id="dashbord-bar">
-    <el-card class="box-card" shadow="hover">
+    <el-card class="box-card" shadow="hover" v-loading="loading">
       <div slot="header" class="clearfix card-top">
         <span>注册企业数统计</span>
       </div>
@@ -18,9 +18,10 @@ require('echarts/lib/component/legend');
 export default {
   data () {
     return {
+      loading: false,
       Chart: {},
-      Data: {
-        finacing: 1,
+      barData: {
+        finacing: 0,
         ecommerce: 0,
         rb: 0
       },
@@ -63,7 +64,7 @@ export default {
           type: 'bar',
           barWidth: '30%',
           barMaxWidth: 80,
-          data: [1, 2, 3],
+          data: [0, 0, 0],
           label: {
             normal: {
               show: true,
@@ -101,11 +102,43 @@ export default {
   mounted () {
     this.initCharts();
   },
+  activated () {
+    this.getCountData();
+  },
   methods: {
     initCharts () {
       let dom = this.$refs.mychart;
       this.Chart = echarts.init(dom);
       this.Chart.setOption(this.option);
+    },
+    getCountData () {
+      this.loading = true;
+      this.$http({
+        url: this.$api.findCustCount,
+        method: 'POST'
+      }).then(res => {
+        this.loading = false;
+        let code = res.data.retCode;
+        code = code * 1;
+        if (code !== 0) {
+          return false;
+        }
+        this.barData.finacing = res.data.responseDate.counts[0].count;
+        this.barData.ecommerce = res.data.responseDate.counts[1].count;
+        this.barData.rb = res.data.responseDate.counts[2].count;
+      }).catch(err => {
+        this.loading = false;
+        console.log(err);
+      });
+    }
+  },
+  watch: {
+    barData: {
+      handler (options) {
+        this.option.series.data = [options.finacing, options.ecommerce, options.rb];
+        this.Chart.setOption(this.option);
+      },
+      deep: true
     }
   }
 };
@@ -136,9 +169,6 @@ export default {
   }
   #dashbord-bar .el-card__header {
     padding: 10px 20px;
-  }
-  .card-top {
-    font-size: 14px;
   }
   #dashbord-bar {
     height: 100%;

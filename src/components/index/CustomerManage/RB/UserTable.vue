@@ -45,7 +45,8 @@ export default {
         name: 'RBCompanyDetail',
         params: {
           custId: data.custId,
-          companyName: data.companyName
+          companyName: data.companyName,
+          companyId: data.companyId
         }
       });
     }

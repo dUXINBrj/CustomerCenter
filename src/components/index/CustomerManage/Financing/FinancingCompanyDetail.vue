@@ -57,7 +57,7 @@
         <el-col :span="6">
           <el-form label-position="left" inline class="tableDetailItem">
             <el-form-item label="是否三证合一:">
-              <span>{{baseInfo.threeCertTogether}}</span>
+              <span>{{baseInfo.threeCertTogether | threeCertTogether}}</span>
             </el-form-item>
           </el-form>
         </el-col>
@@ -225,7 +225,7 @@
             :index="indexMethod">
           </el-table-column>
           <el-table-column
-            prop="loginName"
+            prop="loginAccount"
             label="登录名">
           </el-table-column>
           <el-table-column
@@ -270,7 +270,7 @@ export default {
         'custId': this.custId
       };
       this.$http({
-        url: this.$api.getFinacingCompanyDetail + '?custId=' + this.custId,
+        url: this.$api.getFinacingCompanyDetail,
         method: 'POST',
         data: params
       }).then(res => {
@@ -309,14 +309,9 @@ export default {
       }
     },
     downloadFile (data) {
-      let params = {
-        fileUrl: data.filePath,
-        fileName: data.fileName
-      };
       this.$http({
-        url: this.$api.downloadFinacingFile,
-        method: 'GET',
-        data: params
+        url: this.$api.downloadFinacingFile + '?fileUrl=' + data.filePath + '&fileName=' + data.attachName,
+        method: 'GET'
       }).then(res => {}).catch(err => {
         this.loading = false;
         this.$message.error('网络连接失败，请稍后重试！');
@@ -371,7 +366,6 @@ export default {
       }
     }
   }
-  // TODO custId是否会有重复的情况
 };
 </script>
 <style scoped>

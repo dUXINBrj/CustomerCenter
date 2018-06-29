@@ -33,9 +33,9 @@
         width="180">
       </el-table-column>
       <el-table-column
-        prop="threeCertTogether"
         :show-overflow-tooltip="true"
         label="是否三证合一"
+        :formatter="threeCertTogether"
         width="180">
       </el-table-column>
     </el-table>
@@ -62,7 +62,17 @@ export default {
         case 0: return '运营商'; break;
         case 1: return '企业会员'; break;
         case 2: return '个人会员'; break;
-        default: return '---'; break;
+        default: return ' '; break;
+      }
+    },
+    threeCertTogether (data) {
+      let type = data.threeCertTogether;
+      /* eslint-disable no-unreachable */
+      switch (type) {
+        case 0: return '否'; break;
+        case 1: return '是'; break;
+        case null: return ' '; break;
+        default: return ' '; break;
       }
     }
   }

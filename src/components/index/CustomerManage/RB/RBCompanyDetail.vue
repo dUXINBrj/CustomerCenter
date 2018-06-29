@@ -119,82 +119,35 @@
     <div class="content">
       <h2 class="title">相关文档</h2>
       <div class="container">
-        <p class="subTitle" v-if="baseInfo.attachVos.length === 0">暂无信息</p>
-        <el-row :gutter="20" v-if="baseInfo.attachVos.length !== 0">
-          <el-col :span="12">
-            <div class="doc">
-              <el-row>
-                <el-col :span="7">企业营业执照</el-col>
-                <el-col :span="10" :title="baseInfo.attachVos[0].attachName">{{baseInfo.attachVos[0].attachName | empty}}</el-col>
-                <el-col :span="7">
-                  <div v-if="baseInfo.attachVos[0].filePath">
-                    <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[0])">查看</a>
-                    <a href="javascript:void (0)" @click="downloadFile(baseInfo.attachVos[0])">下载</a>
-                  </div>
-                  <div v-if="!baseInfo.attachVos[0].filePath">
-                    暂无
-                  </div>
-                </el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="7">税务登记证</el-col>
-                <el-col :span="10" :title="baseInfo.attachVos[2].attachName">{{baseInfo.attachVos[2].attachName | empty}}</el-col>
-                <el-col :span="7">
-                  <div v-if="baseInfo.attachVos[2].filePath">
-                    <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[2])">查看</a>
-                    <a href="javascript:void (0)" @click="downloadFile(baseInfo.attachVos[2])">下载</a>
-                  </div>
-                  <div v-if="!baseInfo.attachVos[2].filePath">
-                    暂无
-                  </div>
-                </el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="7">业务代表身份证</el-col>
-                <el-col :span="10" :title="baseInfo.attachVos[4].attachName">{{baseInfo.attachVos[4].attachName | empty}}</el-col>
-                <el-col :span="7">
-                  <div v-if="baseInfo.attachVos[4].filePath">
-                    <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[4])">查看</a>
-                    <a href="javascript:void (0)" @click="downloadFile(baseInfo.attachVos[4])">下载</a>
-                  </div>
-                  <div v-if="!baseInfo.attachVos[4].filePath">
-                    暂无
-                  </div>
-                </el-col>
-              </el-row>
-            </div>
-          </el-col>
-          <el-col :span="12">
-            <div class="doc">
-              <el-row>
-                <el-col :span="7">企业Logo</el-col>
-                <el-col :span="10" :title="baseInfo.attachVos[1].attachName">{{baseInfo.attachVos[1].attachName | empty}}</el-col>
-                <el-col :span="7">
-                  <div v-if="baseInfo.attachVos[1].filePath">
-                    <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[1])">查看</a>
-                    <a href="javascript:void (0)" @click="downloadFile(baseInfo.attachVos[1])">下载</a>
-                  </div>
-                  <div v-if="!baseInfo.attachVos[1].filePath">
-                    暂无
-                  </div>
-                </el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="7">组织机构</el-col>
-                <el-col :span="10" :title="baseInfo.attachVos[3].attachName">{{baseInfo.attachVos[3].attachName | empty}}</el-col>
-                <el-col :span="7">
-                  <div v-if="baseInfo.attachVos[3].filePath">
-                    <a href="javascript:void (0)" @click="viewImg(baseInfo.attachVos[3])">查看</a>
-                    <a href="javascript:void (0)" @click="downloadFile(baseInfo.attachVos[3])">下载</a>
-                  </div>
-                  <div v-if="!baseInfo.attachVos[3].filePath">
-                    暂无
-                  </div>
-                </el-col>
-              </el-row>
-            </div>
-          </el-col>
-        </el-row>
+        <el-table
+          :data="baseInfo.attachVos"
+          height="250"
+          border
+          style="width: 100%">
+          <el-table-column
+            type="index"
+            :index="indexMethod">
+          </el-table-column>
+          <el-table-column
+            prop="certificatetypeName"
+            :show-overflow-tooltip="true"
+            label="证件类型名称">
+          </el-table-column>
+          <el-table-column
+            prop="certificateContent"
+            label="证件图片"
+            :show-overflow-tooltip="true">
+          </el-table-column>
+          <el-table-column
+            :show-overflow-tooltip="true"
+            label=""
+            width="200">
+            <template slot-scope="scope">
+              <el-button @click.stop="viewImg(scope.row)" type="text" size="small">查看</el-button>
+              <el-button @click.stop="downloadFile(scope.row)" type="text" size="small">下载</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
       </div>
     </div>
     <div class="content">
@@ -291,6 +244,7 @@ export default {
     return {
       loading: true,
       custId: '',
+      companyId: '',
       baseInfo: {
         attachVos: [],
         companyAccountVo: [],
@@ -300,6 +254,7 @@ export default {
   },
   mounted () {
     this.custId = this.$route.params.custId;
+    this.companyId = this.$route.params.companyId;
     this.getCompanyInfo();
   },
   methods: {
@@ -308,7 +263,7 @@ export default {
         'custId': this.custId
       };
       this.$http({
-        url: this.$api.getRbCompanyDetail + '?custId=' + this.custId,
+        url: this.$api.getRbCompanyDetail,
         method: 'POST',
         data: params
       }).then(res => {
@@ -320,9 +275,14 @@ export default {
           return false;
         }
         this.baseInfo = res.data.responseDate.companyDetailVo;
+        // 查询荣邦企业详细信息 需要custId和CompanyId 为保证唯一性 将两者加起来
+        let custId = this.custId;
+        custId = custId.toString();
+        let companyId = this.companyId;
+        companyId = companyId.toString();
         let data = {
           name: 'RbData',
-          custId: this.custId,
+          custId: custId + companyId,
           data: res.data.responseDate.companyDetailVo
         };
         this.$store.commit('addDetailData', data);
@@ -346,14 +306,9 @@ export default {
       }
     },
     downloadFile (data) {
-      let params = {
-        fileUrl: data.filePath,
-        fileName: data.fileName
-      };
       this.$http({
-        url: this.$api.downloadFinacingFile,
-        method: 'GET',
-        data: params
+        url: this.$api.downloadFinacingFile + '?fileUrl=' + data.certificatePath + '&fileName=' + data.certificateContent,
+        method: 'GET'
       }).then(res => {}).catch(err => {
         this.loading = false;
         this.$message.error('网络连接失败，请稍后重试！');
@@ -361,7 +316,12 @@ export default {
       });
     },
     viewImg (data) {
-      console.log(data);
+      this.$router.push({
+        name: '图片浏览',
+        params: {
+          filePath: data.filePath
+        }
+      });
     }
   },
   computed: {
@@ -386,12 +346,14 @@ export default {
         }
         if (!flag) {
           this.custId = to.params.custId;
+          this.companyId = to.params.companyId;
           this.getCompanyInfo();
         } else {
           if (this.RbData[to.params.custId]) {
             this.baseInfo = this.RbData[to.params.custId];
           } else {
             this.custId = to.params.custId;
+            this.companyId = to.params.companyId;
             this.getCompanyInfo();
           }
         }

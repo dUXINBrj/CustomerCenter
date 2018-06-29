@@ -89,7 +89,7 @@ export default {
         case 1: return '融资平台'; break;
         case 2: return '电商平台'; break;
         case 3: return '荣邦'; break;
-        default: return '---'; break;
+        default: return ' '; break;
       }
     },
     userState (data) {
@@ -101,7 +101,7 @@ export default {
         case 3: return '已注销'; break;
         case 4: return '已冻结'; break;
         case 9: return '已删除'; break;
-        default: return '---'; break;
+        default: return ' '; break;
       }
     },
     userType (data) {
@@ -110,7 +110,7 @@ export default {
       switch (type) {
         case 0: return '管理员账户'; break;
         case 1: return '会员账户'; break;
-        default: return '---'; break;
+        default: return ' '; break;
       }
     },
     accountType (data) {
@@ -119,7 +119,7 @@ export default {
       switch (type) {
         case 0: return '主账号'; break;
         case 1: return '子账号'; break;
-        default: return '---'; break;
+        default: return ' '; break;
       }
     },
     accountStatu (data) {
@@ -128,7 +128,7 @@ export default {
       switch (type) {
         case 0: return '锁定'; break;
         case 1: return '未锁定'; break;
-        default: return '---'; break;
+        default: return ' '; break;
       }
     }
   }

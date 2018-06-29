@@ -109,7 +109,7 @@ Mock.mock(ApiPath.getFinacingCompanyDetail, 'post', {
       ],
       'companyAccountVo|1-10': [
         {
-          'loginName': '@Cname',
+          'loginAccount': '@CNAME',
           'cellPhone': '@integer( 1000000000000, 9999999999999 )',
           'email': '@email',
           'firstRegPlatform': '@integer(1,3)'

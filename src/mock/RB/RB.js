@@ -2,11 +2,23 @@ import * as ApiPath from '@/api';
 
 const Mock = require('mockjs');
 
+Mock.mock(ApiPath.getFinacingCompany + '?clientType=3', 'post', {
+  'retCode': '0',
+  'responseDate': {
+    'companys|1-20': [{
+      'custId|+1': 1,
+      'companyName': '@CNAME'
+    }]
+  },
+  'retMessage': '操作成功'
+});
+
 Mock.mock(ApiPath.getRbUserTable, 'post', {
   'retCode': 0,
   'responseDate': {
     'accountVoList|1-20': [{
       'custId|+1': 1,
+      'companyId': '@integer(100000000000000000,999999999999999999)',
       'loginAccount': '@CNAME',
       'companyName': '@CNAME',
       'userCode': '600988272',
@@ -23,6 +35,7 @@ Mock.mock(ApiPath.getRbCompanyTable, 'post', {
   'responseDate': {
     'companyVoList|1-20': [{
       'custId': 100000000000528,
+      'companyId': '@integer(100000000000000000,999999999999999999)',
       'companyName': '@CNAME',
       'industrytypeName': '@cparagraph(1)',
       'address': '@county(true)',
@@ -38,7 +51,7 @@ Mock.mock(ApiPath.getRbCompanyDetail, 'post', {
   'retCode': 0,
   'responseDate': {
     'companyDetailVo': {
-      'companyName': '@Cname',
+      'companyName': '@CNAME',
       'address': '@county(true)',
       'companyType': '@cparagraph(1)', // 商户类型
       'industrytype': '@cparagraph(1)', // 行业类型
@@ -53,51 +66,11 @@ Mock.mock(ApiPath.getRbCompanyDetail, 'post', {
       'unifiedSocialInformationCode': '@integer( 10000000, 99999999999 )', // 统一社会信息代码
       'email': '@email',
       'remark': '@cparagraph(1,3)',
-      'attachVos': [
+      'attachVos|0-20': [
         {
-          'fileType': '0',
-          'attachName': '2.PNG',
-          'filePath': '/jf/test/register/0/20180524152004.PNG'
-        },
-        {
-          'fileType': '1',
-          'attachName': 'A7YA0PZPIWQN%`VMPNUBX5C.png',
-          'filePath': '/jf/test/register/1/20180524152008.png'
-        },
-        {
-          'fileType': '2',
-          'attachName': 'A7YA0PZPIWQN%`VMPNUBX5C.png',
-          'filePath': '/jf/test/register/2/20180524152012.png'
-        },
-        {
-          'fileType': '3',
-          'attachName': '2.PNG',
-          'filePath': '/jf/test/register/3/20180524152016.PNG'
-        },
-        {
-          'fileType': '4',
-          'attachName': 'A7YA0PZPIWQN%`VMPNUBX5C.png',
-          'filePath': '/jf/test/register/4/20180524152023.png'
-        },
-        {
-          'fileType': '5',
-          'attachName': '2.PNG',
-          'filePath': '/jf/test/register/5/20180524152027.PNG'
-        },
-        {
-          'fileType': '6',
-          'attachName': '1.PNG',
-          'filePath': '/jf/test/register/6/20180524152032.PNG'
-        },
-        {
-          'fileType': '7',
-          'attachName': '1.PNG',
-          'filePath': '/jf/test/register/7/20180524152036.PNG'
-        },
-        {
-          'fileType': '8',
-          'attachName': 'WSN-XS-2018-0524-0107.pdf',
-          'filePath': '/jf/test/register/8/20180524152224.pdf'
+          'certificatetypeName': '@CNAME',
+          'certificateContent': 'A7YA0PZPIWQN%`VMPNUBX5C.png',
+          'certificatePath': '/jf/test/register/2/20180524152012.png'
         }
       ],
       'bankAccountVos|1-10': [{
